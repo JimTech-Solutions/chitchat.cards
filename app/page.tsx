@@ -5,10 +5,15 @@ import Link from "next/link";
 
 import imageUrl from "../assets/images/thumbnail.webp";
 
-import games from '@/data/games.json';
+
+// import supabase from '@/utils/initSupabase';
+
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 
 import Slider from "react-slick";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Question {
   category: string;
@@ -27,7 +32,25 @@ interface Game {
 
 export default function Home() {
 
-  const [currentSlideNumber, setCurrentSlideNumber] = useState(0);
+  const [games, setGames] = useState<Game[]>([]);
+  const [currentGame, setCurrentGame] = useState<Game | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let { data, error } = await supabase.from('games').select('*');
+      if (error) {
+        console.error('Error loading games:', error);
+        return;
+      }
+      if (data && data.length > 0) {
+        setGames(data);
+        setCurrentGame(data[0]); // Initialize with the first game or any specific logic
+      }
+    };
+    fetchData();
+  }, []);
+
+
   const settings = {
     infinite: true,
     slidesToShow: 4,
@@ -37,9 +60,9 @@ export default function Home() {
     autoplaySpeed: 3500,
     cssEase: "linear",
     pauseOnHover: true,
-    arrows: false,
-    beforeChange: (oldIndex, newIndex) => {
-          setCurrentSlideNumber(newIndex);
+    arrows: true,
+    beforeChange: (oldIndex: number, newIndex: number) => {
+          setCurrentGame(games[newIndex]);
       },
     responsive: [
       {
@@ -93,20 +116,23 @@ export default function Home() {
           </Slider>
         </div>
 
-        <div className="p-5">
-            <p className="text-lg mb-3 font-bold">Description</p>
-            <p className="text-md">{games[currentSlideNumber+1].long_description}</p>
-            <p className="mb-3">Number of Cards: 50/100</p>
-            <p className="mb-3">Recommended for:</p>
-            <div className="flex gap-3">
-              <span className="py-2 px-4 bg-black">test</span>
-              <span className="py-2 px-4 bg-black">test</span>
-            </div>
-            <div className="mt-6 flex gap-3 flex-wrap">
-              <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/game/${games[currentSlideNumber+1].slug}`}>View Deck</Link>
-              <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Cards</Link>
-            </div>
-        </div>
+        {currentGame && (
+          <div className="p-5">
+              <p className="text-lg mb-3 font-bold">Description</p>
+              <p className="text-md mb-3">{currentGame.long_description}</p>
+              <p className="mb-3">Number of Cards: 50/100</p>
+              <p className="mb-3">Recommended for:</p>
+              <div className="flex gap-3">
+                {currentGame.recommended.map((x, index) => {
+                  return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
+                })}
+              </div>
+              <div className="mt-6 flex gap-3 flex-wrap">
+                <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/game/${currentGame.slug}`}>View Deck</Link>
+                <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Cards</Link>
+              </div>
+          </div>
+        )}
 
       
       </div>
