@@ -8,17 +8,20 @@ import { createClient } from '@supabase/supabase-js'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Slider from "react-slick";
 
-const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const page = () => {
     const pathname = usePathname();
-    const [searchParams] = useSearchParams();
     const slug = pathname.split('/').pop();
 
     const [questions, setQuestions] = useState([]);
     const [categoriesData, setCategoriesData] = useState([]);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
+
+
 
     const shuffleArray = (array) => {
         let arr = [...array];
@@ -40,7 +43,7 @@ const page = () => {
             .eq('slug', slug)
             .single();
 
-         let { data: catData, error } = await supabase
+        let { data: catData, error } = await supabase
             .from('questions_categories')
             .select('*')
 
