@@ -8,29 +8,29 @@ import { createClient } from '@supabase/supabase-js'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Slider from "react-slick";
 
+import {Games, Categories, Questions} from '@/types/games'
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const page = () => {
+const Page: React.FC = () => {
     const pathname = usePathname();
     const slug = pathname.split('/').pop();
 
-    const [questions, setQuestions] = useState([]);
-    const [categoriesData, setCategoriesData] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [questions, setQuestions] = useState<Questions[]>([]);
+    const [categoriesData, setCategoriesData] = useState<Categories[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
 
-
-
-    const shuffleArray = (array) => {
+    const shuffleArray = (array: any[]) => {
         let arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap elements
         }
         return arr;
-    };
+    }
 
     useEffect(() => {
         if (!slug) return; // Do nothing if slug is not yet available
@@ -47,10 +47,12 @@ const page = () => {
             .from('questions_categories')
             .select('*')
 
-        if (!error) { 
+        if (!error && catData) { 
             setCategoriesData(catData);
         } else {
-            console.log(gameError);
+            // Handle the case where catData is null or an error occurred
+            console.log(error); // Assuming you meant to log `error` instead of `gameError` which isn't defined in the provided code snippet.
+            setCategoriesData([]); // Setting to an empty array as a fallback
         }
 
         if (gameError) {
@@ -75,7 +77,7 @@ const page = () => {
         };
 
         fetchQuestions();
-    }, []);
+    }, [slug]);
 
     const handleShuffleButton = () => {
         setQuestions(shuffleArray(questions));
@@ -89,7 +91,7 @@ const page = () => {
         return foundCategory ? foundCategory.color : 'white'; 
     };
 
-    let sliderRef = useRef(null);
+    let sliderRef = useRef<Slider | null>(null);
     const next = () => {
         sliderRef.slickNext();
     };
@@ -153,4 +155,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
