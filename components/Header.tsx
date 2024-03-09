@@ -1,24 +1,29 @@
+import { Grandstander } from 'next/font/google';
 import Link from 'next/link';
 import React from 'react'
 import { CiUser } from "react-icons/ci";
 import { GrAppsRounded } from "react-icons/gr";
 
+const grandstander = Grandstander({
+  weight: '600',
+  subsets: ['latin'],
+});
 
-import localFont from 'next/font/local'
-const DancingScript = localFont({
-  src: [
-    {
-      path: '../assets/fonts/DancingScript-Regular.otf',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../assets/fonts/DancingScript-Bold.otf',
-      weight: '700',
-      style: 'normal',
-    }
-  ],
-})
+// import localFont from 'next/font/local'
+// const DancingScript = localFont({
+//   src: [
+//     {
+//       path: '../assets/fonts/DancingScript-Regular.otf',
+//       weight: '400',
+//       style: 'normal',
+//     },
+//     {
+//       path: '../assets/fonts/DancingScript-Bold.otf',
+//       weight: '700',
+//       style: 'normal',
+//     }
+//   ],
+// })
 
 
 const Header = () => {
@@ -31,7 +36,7 @@ const Header = () => {
               </button>
             </Link>
 
-            <p className={`text-3xl ${DancingScript.className} tracking-[0.15em]`} >ChitChat</p>
+            <p className={`text-3xl ${grandstander.className} tracking-[0.05em]`} >ChitChat</p>
 
             <button className="rounded-2xl p-5 bg-[#272727]">
                 <CiUser size="24" />

@@ -26,3 +26,8 @@ body {
     text-wrap: balance;
   }
 }
+
+.slick-center {
+  transform: scale(1.05);
+  transition-duration: 700ms;
+}

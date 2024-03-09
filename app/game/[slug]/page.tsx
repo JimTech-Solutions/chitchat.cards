@@ -87,7 +87,8 @@ const Page: React.FC = () => {
     };
 
     const getCategoryColor = (category: string) => {
-        const foundCategory = categoriesData.find((cat) => cat.category === category);
+        console.log(categoriesData)
+        const foundCategory = categoriesData.find((cat) => cat.category == category);
         return foundCategory ? foundCategory.color : 'white'; 
     };
 
@@ -122,6 +123,7 @@ const Page: React.FC = () => {
                     {...settings}>
                     {questions.map((question, index) => {
                         const textColor = getCategoryColor(question.category);
+
                         return (
                         <div key={index} className="text-center p-10 my-auto justify-center items-center">
                                 <p className={`mb-3`} style={{ color: textColor }}>{question.category}</p>

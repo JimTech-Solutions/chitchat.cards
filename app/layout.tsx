@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Grandstander} from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
@@ -7,6 +7,11 @@ import Header from '@/components/Header';
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const grandstander = Grandstander({
+  weight: '400',
+  subsets: ['latin'],
+});
 
 export const metadata: Metadata = {
   title: "ChitChat | Deepen Connections with Interactive Conversation Games",
@@ -23,7 +28,7 @@ export default function RootLayout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </Head>
-      <body className={inter.className}>
+      <body className={grandstander.className}>
         <Header />
         {children}
         </body>
