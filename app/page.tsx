@@ -40,7 +40,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  function NextArrow(props) {
+  function NextArrow(props : any) {
     const { className, style, onClick } = props;
     return (
       <div
@@ -55,7 +55,7 @@ export default function Home() {
     );
   }
 
-  function PrevArrow(props) {
+  function PrevArrow(props : any) {
     const { className, style, onClick } = props;
     return (
       <div
