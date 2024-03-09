@@ -48,7 +48,7 @@ export default function Home() {
     autoplaySpeed: 3500,
     cssEase: "linear",
     pauseOnHover: true,
-    arrows: true,
+    arrows: false,
     beforeChange: (oldIndex: number, newIndex: number) => {
           setCurrentGame(games[newIndex]);
       },
