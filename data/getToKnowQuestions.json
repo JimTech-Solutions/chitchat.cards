@@ -1,0 +1,321 @@
+[
+	{ "category": "Personal", "question": "Who is your hero?" },
+	{
+		"category": "Personal",
+		"question": "If you could live anywhere, where would it be?"
+	},
+	{ "category": "Personal", "question": "What is your biggest fear?" },
+	{
+		"category": "Travel",
+		"question": "What is your favorite family vacation?"
+	},
+	{
+		"category": "Personal",
+		"question": "What would you change about yourself if you could?"
+	},
+	{ "category": "Personal", "question": "What really makes you angry?" },
+	{ "category": "Work", "question": "What motivates you to work hard?" },
+	{
+		"category": "Work",
+		"question": "What is your favorite thing about your career?"
+	},
+	{
+		"category": "Work",
+		"question": "What is your biggest complaint about your job?"
+	},
+	{
+		"category": "Personal",
+		"question": "What is your proudest accomplishment?"
+	},
+	{
+		"category": "Family",
+		"question": "What is your child's proudest accomplishment?"
+	},
+	{ "category": "Personal", "question": "What is your favorite book to read?" },
+	{ "category": "Personal", "question": "What makes you laugh the most?" },
+	{
+		"category": "Entertainment",
+		"question": "What was the last movie you went to? What did you think?"
+	},
+	{
+		"category": "Career",
+		"question": "What did you want to be when you were small?"
+	},
+	{
+		"category": "Career",
+		"question": "What does your child want to be when he/she grows up?"
+	},
+	{
+		"category": "Personal",
+		"question": "If you could choose to do anything for a day, what would it be?"
+	},
+	{
+		"category": "Sports",
+		"question": "What is your favorite game or sport to watch and play?"
+	},
+	{
+		"category": "Personal",
+		"question": "Would you rather ride a bike, ride a horse, or drive a car?"
+	},
+	{
+		"category": "Entertainment",
+		"question": "What would you sing at Karaoke night?"
+	},
+	{
+		"category": "Entertainment",
+		"question": "What two radio stations do you listen to in the car the most?"
+	},
+	{
+		"category": "Household",
+		"question": "Which would you rather do: wash dishes, mow the lawn, clean the bathroom, or vacuum the house?"
+	},
+	{
+		"category": "Household",
+		"question": "If you could hire someone to help you, would it be with cleaning, cooking, or yard work?"
+	},
+	{
+		"category": "Food",
+		"question": "If you could only eat one meal for the rest of your life, what would it be?"
+	},
+	{ "category": "Personal", "question": "Who is your favorite author?" },
+	{
+		"category": "Personal",
+		"question": "Have you ever had a nickname? What is it?"
+	},
+	{
+		"category": "Personal",
+		"question": "Do you like or dislike surprises? Why or why not?"
+	},
+	{
+		"category": "Entertainment",
+		"question": "In the evening, would you rather play a game, visit a relative, watch a movie, or read?"
+	},
+	{
+		"category": "Travel",
+		"question": "Would you rather vacation in Hawaii or Alaska, and why?"
+	},
+	{
+		"category": "Career",
+		"question": "Would you rather win the lottery or work at the perfect job? And why?"
+	},
+	{
+		"category": "Personal",
+		"question": "Who would you want to be stranded with on a deserted island?"
+	},
+	{
+		"category": "Personal",
+		"question": "If money was no object, what would you do all day?"
+	},
+	{
+		"category": "Time Travel",
+		"question": "If you could go back in time, what year would you travel to?"
+	},
+	{
+		"category": "Personal",
+		"question": "How would your friends describe you?"
+	},
+	{ "category": "Personal", "question": "What are your hobbies?" },
+	{
+		"category": "Personal",
+		"question": "What is the best gift you have been given?"
+	},
+	{
+		"category": "Personal",
+		"question": "What is the worst gift you have received?"
+	},
+	{
+		"category": "Personal",
+		"question": "Aside from necessities, what one thing could you not go a day without?"
+	},
+	{ "category": "Personal", "question": "List two pet peeves." },
+	{
+		"category": "Personal",
+		"question": "Where do you see yourself in five years?"
+	},
+	{ "category": "Personal", "question": "How many pairs of shoes do you own?" },
+	{
+		"category": "Superpowers",
+		"question": "If you were a super-hero, what powers would you have?"
+	},
+	{
+		"category": "Personal",
+		"question": "What would you do if you won the lottery?"
+	},
+	{
+		"category": "Transportation",
+		"question": "What form of public transportation do you prefer? (air, boat, train, bus, car, etc.)"
+	},
+	{ "category": "Animals", "question": "What's your favorite zoo animal?" },
+	{
+		"category": "Time Travel",
+		"question": "If you could go back in time to change one thing, what would it be?"
+	},
+	{
+		"category": "Personal",
+		"question": "If you could share a meal with any 4 individuals, living or dead, who would they be?"
+	},
+	{ "category": "Personal", "question": "How many pillows do you sleep with?" },
+	{
+		"category": "Personal",
+		"question": "What's the longest you've gone without sleep (and why)?"
+	},
+	{
+		"category": "Personal",
+		"question": "What's the tallest building you've been to the top in?"
+	},
+	{
+		"category": "Personal",
+		"question": "Would you rather trade intelligence for looks or looks for intelligence?"
+	},
+	{ "category": "Personal", "question": "How often do you buy clothes?" },
+	{ "category": "Personal", "question": "Have you ever had a secret admirer?" },
+	{ "category": "Holidays", "question": "What's your favorite holiday?" },
+	{
+		"category": "Adventure",
+		"question": "What's the most daring thing you've ever done?"
+	},
+	{
+		"category": "Entertainment",
+		"question": "What was the last thing you recorded on TV?"
+	},
+	{ "category": "Books", "question": "What was the last book you read?" },
+	{
+		"category": "Food",
+		"question": "What's your favorite type of foreign food?"
+	},
+	{ "category": "Personal", "question": "Are you a clean or messy person?" },
+	{
+		"category": "Entertainment",
+		"question": "Who would you want to play you in a movie of your life?"
+	},
+	{
+		"category": "Personal",
+		"question": "How long does it take you to get ready in the morning?"
+	},
+	{
+		"category": "Household",
+		"question": "What kitchen appliance do you use every day?"
+	},
+	{ "category": "Food", "question": "What's your favorite fast food chain?" },
+	{ "category": "Food", "question": "What's your favorite family recipe?" },
+	{ "category": "Personal", "question": "Do you love or hate rollercoasters?" },
+	{
+		"category": "Holidays",
+		"question": "What's your favorite family tradition?"
+	},
+	{
+		"category": "Childhood",
+		"question": "What is your favorite childhood memory?"
+	},
+	{ "category": "Movies", "question": "What's your favorite movie?" },
+	{
+		"category": "Childhood",
+		"question": "How old were you when you learned Santa wasn't real? How did you find out?"
+	},
+	{
+		"category": "Personal",
+		"question": "Is your glass half full or half empty?"
+	},
+	{
+		"category": "Love",
+		"question": "What's the craziest thing you've done in the name of love?"
+	},
+	{
+		"category": "Survival",
+		"question": "What three items would you take with you on a deserted island?"
+	},
+	{
+		"category": "School",
+		"question": "What was your favorite subject in school?"
+	},
+	{
+		"category": "Food",
+		"question": "What's the most unusual thing you've ever eaten?"
+	},
+	{ "category": "Collectibles", "question": "Do you collect anything?" },
+	{
+		"category": "Fashion",
+		"question": "Is there anything you wished would come back into fashion?"
+	},
+	{
+		"category": "Personality",
+		"question": "Are you an introvert or an extrovert?"
+	},
+	{
+		"category": "Senses",
+		"question": "Which of the five senses would you say is your strongest?"
+	},
+	{
+		"category": "Personal",
+		"question": "Have you ever had a surprise party? (that was an actual surprise)"
+	},
+	{
+		"category": "Famous",
+		"question": "Are you related or distantly related to anyone famous?"
+	},
+	{ "category": "Fitness", "question": "What do you do to keep fit?" },
+	{
+		"category": "Family",
+		"question": "Does your family have a 'motto' - spoken or unspoken?"
+	},
+	{
+		"category": "Government",
+		"question": "If you were ruler of your own country what would be the first law you would introduce?"
+	},
+	{
+		"category": "School",
+		"question": "Who was your favorite teacher in school and why?"
+	},
+	{
+		"category": "Thoughts",
+		"question": "What three things do you think of the most each day?"
+	},
+	{
+		"category": "Personal",
+		"question": "If you had a warning label, what would yours say?"
+	},
+	{
+		"category": "Music",
+		"question": "What song would you say best sums you up?"
+	},
+	{
+		"category": "Celebrity",
+		"question": "What celebrity would you like to meet at Starbucks for a cup of coffee?"
+	},
+	{ "category": "Crush", "question": "Who was your first crush?" },
+	{
+		"category": "Scenery",
+		"question": "What's the most interesting thing you can see out of your office or kitchen window?"
+	},
+	{
+		"category": "Personal",
+		"question": "On a scale of 1-10 how funny would you say you are?"
+	},
+	{
+		"category": "Future",
+		"question": "Where do you see yourself in 10 years?"
+	},
+	{ "category": "Jobs", "question": "What was your first job?" },
+	{
+		"category": "Music",
+		"question": "If you could join any past or current music group which would you want to join?"
+	},
+	{ "category": "Languages", "question": "How many languages do you speak?" },
+	{
+		"category": "Holidays",
+		"question": "What is your favorite family holiday tradition?"
+	},
+	{
+		"category": "Intelligence",
+		"question": "Who is the most intelligent person you know?"
+	},
+	{
+		"category": "Animal",
+		"question": "If you had to describe yourself as an animal, which one would it be?"
+	},
+	{
+		"category": "Personal",
+		"question": "What is one thing you will never do again?"
+	},
+	{ "category": "Personal", "question": "Who knows you the best?" }
+]

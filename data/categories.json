@@ -1,0 +1,27 @@
+[
+	{
+		"category": "Life",
+		"color": "#3498db"
+	},
+	{
+		"category": "Ethics and Values",
+		"color": "#2ecc71"
+	},
+	{
+		"category": "Family",
+		"color": "#9b59b6"
+	},
+	{
+		"category": "Love and Relationships",
+		"color": "#ff6b6b"
+	},
+
+	{
+		"category": "TRUTH",
+		"color": "green"
+	},
+	{
+		"category": "DARE",
+		"color": "red"
+	}
+]
