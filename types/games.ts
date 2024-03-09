@@ -9,10 +9,10 @@ export interface Categories {
 export interface Questions {
     gid: UUID,
     category: string,
-    color: string
+    question: string
 }
 
-export interface Games {
+export interface Game {
     gid: UUID,
     title: string,
     short_description: string,

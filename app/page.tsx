@@ -15,20 +15,8 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', proces
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 
-interface Question {
-  category: string;
-  question: string;
-}
+import {Game, Categories, Questions} from '@/types/games'
 
-interface Game {
-  id: number;
-  title: string;
-  short_description: string;
-  long_description: string;
-  thumbnail: string;
-  data: string;
-  slug: string;
-}
 
 export default function Home() {
 

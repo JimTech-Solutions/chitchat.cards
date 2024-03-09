@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Slider from "react-slick";
 
-import {Games, Categories, Questions} from '@/types/games'
+import { Categories, Questions} from '@/types/games'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -93,10 +93,11 @@ const Page: React.FC = () => {
 
     let sliderRef = useRef<Slider | null>(null);
     const next = () => {
-        sliderRef.slickNext();
+        sliderRef.current?.slickNext();
     };
+
     const previous = () => {
-        sliderRef.slickPrev();
+        sliderRef.current?.slickPrev();
     };
 
     const settings = {
@@ -117,9 +118,7 @@ const Page: React.FC = () => {
             </div>
             )}
             <div className="slider-container my-[150px] xl:my-[250px]">
-                <Slider ref={slider => {
-                    sliderRef = slider;
-                    }}
+                <Slider ref={sliderRef}
                     {...settings}>
                     {questions.map((question, index) => {
                         const textColor = getCategoryColor(question.category);
