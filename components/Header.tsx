@@ -1,7 +1,7 @@
 import { Grandstander } from 'next/font/google';
 import Link from 'next/link';
 import React from 'react'
-import { CiUser } from "react-icons/ci";
+import { CiFilter, CiUser } from "react-icons/ci";
 import { GrAppsRounded } from "react-icons/gr";
 
 const grandstander = Grandstander({
@@ -26,7 +26,7 @@ const grandstander = Grandstander({
 // })
 
 
-const Header = () => {
+const Header = ({filter = false}) => {
   return (
     <header className=" flex justify-between w-full p-5">
         <div className="flex justify-between w-full items-center">
@@ -42,9 +42,16 @@ const Header = () => {
               </p>
             </Link>
 
-            <button className="rounded-2xl p-5 bg-[#272727]">
-                <CiUser size="24" />
-            </button>
+            {filter ? (
+              <button className="rounded-2xl p-5 bg-[#272727]">
+                  <CiFilter size="24" />
+              </button>
+            ) : (
+              <button className="rounded-2xl p-5 bg-[#272727]">
+                  <CiUser size="24" />
+              </button>
+            )}
+
 
         </div>
     </header>

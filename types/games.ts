@@ -21,3 +21,26 @@ export interface Game {
     recommended: string[],
     slug: string
 }
+
+export type GameData = {
+  game_title: string;
+  game_short_description: string;
+  game_long_description: string;
+  game_thumbnail: string;
+  game_recommended: string[];
+  game_slug: string;
+  total_questions: number;
+  game_questions: GameQuestion[];
+  game_categories: GameCategory[];
+};
+
+export type GameQuestion = {
+  question: string;
+  category: string;
+};
+
+export type GameCategory = {
+  category: string;
+  color: string;
+  question_count: number;
+};
