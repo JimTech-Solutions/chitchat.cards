@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <header className=" flex justify-between w-full p-5">
         <div className="flex justify-between w-full items-center">
-            <Link href="play">
+            <Link href="/play">
               <button className="rounded-2xl p-5 bg-[#272727]">
                   <GrAppsRounded size="24" /> 
               </button>
