@@ -118,7 +118,7 @@ const Page: React.FC = () => {
                     <p className="text-2xl">Loading...</p>
             </div>
             )}
-            <div className="slider-container my-[150px] xl:my-[250px]">
+            <div className="slider-container my-[100px] xl:my-[250px]">
                 <Slider ref={sliderRef}
                     {...settings}>
                     {questions.map((question, index) => {
