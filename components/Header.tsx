@@ -25,6 +25,9 @@ const grandstander = Grandstander({
 //   ],
 // })
 
+import ChitChatIcon from '@/assets/icons/logo_icon.svg'
+
+import Image from 'next/image';
 
 const Header = ({filter = false}) => {
   return (
@@ -37,9 +40,13 @@ const Header = ({filter = false}) => {
             </Link>
 
             <Link href="/">
-              <p className={`text-3xl ${grandstander.className} tracking-[0.05em]`} >
-                Chit<span className="text-[#FFD700]">Chat</span>
-              </p>
+              <div className="flex gap-2 items-start justify-center"> 
+                <Image src={ChitChatIcon} alt="test" className="w-[30px]"/>
+                <p className={`text-3xl ${grandstander.className} tracking-[0.05em]`} >
+                  Chit<span className="text-[#FFD700]">Chat</span>
+                </p>
+                
+              </div>
             </Link>
 
             {filter ? (
