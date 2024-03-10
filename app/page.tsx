@@ -73,7 +73,7 @@ export default function Home() {
 
   const settings = {
     // centerPadding: '100px',
-    centerMode: true,
+    // centerMode: true,
     // infinite: true,
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -99,7 +99,7 @@ export default function Home() {
       {
         breakpoint: 650,
         settings: {
-
+          autoplay: false,
           infinite: true,
           slidesToShow: 1,
         },
@@ -111,7 +111,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <div className=" shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center">POPULAR GAMES</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">POPULAR DECKS</h2>
 
         <div className="slider-container ">
           <Slider {...settings}> 
@@ -147,7 +147,7 @@ export default function Home() {
               </div>
               <div className="mt-6 flex gap-3 flex-wrap">
                 <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/game/${currentGame.slug}`}>View Deck</Link>
-                <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Cards</Link>
+                <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link>
               </div>
           </div>
         )}
