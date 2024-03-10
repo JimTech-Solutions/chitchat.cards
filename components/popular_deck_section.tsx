@@ -112,7 +112,7 @@ const PopularDeckSection = () => {
                 <Slider {...settings}>
                     {games.map((game, index) => {
                         return (
-                            <Link href="/" key={index}>
+                            <Link href={`/play/${game.slug}`} key={index}>
                                 <div className="rounded-lg relative hover:scale-[1.05] duration-300 m-5">
                                     <Image src={imageUrl} alt="Soul Searchers Game" className="rounded-xl" />
 
