@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
 import Header from '@/components/Header';
 import Head from "next/head";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,11 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+        <GoogleAnalytics gaId="G-X05HE2M1XM" />
       </Head>
       <body className={grandstander.className}>
         <Header />
         {children}
-        </body>
+      </body>
     </html>
   );
 }
