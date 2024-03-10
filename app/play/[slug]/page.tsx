@@ -160,9 +160,9 @@ const Page: React.FC = () => {
 
 
             {loading && (
-            <div className="text-center p-10  flex flex-col justify-center">
-                    <p className="text-2xl">Loading...</p>
-            </div>
+                <div className="slider-container my-[150px] xl:my-[300px] flex items-center justify-center"> 
+                    <div className="w-12 h-12 rounded-full animate-spin border-y border-solid border-5 border-yellow-500 border-t-transparent"></div>
+                </div>
             )}
             <div className="slider-container my-[100px] xl:my-[250px]">
                 <Slider ref={sliderRef}
