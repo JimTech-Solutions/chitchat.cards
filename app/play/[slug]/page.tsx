@@ -110,7 +110,7 @@ const Page: React.FC = () => {
     };
 
   return (
-    <section className="flex  flex-col justify-center  relative">
+    <section className="flex  flex-col justify-center  relative mt-5">
 
 
             {loading && (
