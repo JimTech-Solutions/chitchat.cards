@@ -141,7 +141,7 @@ const PopularDeckSection = () => {
                         })}
                     </div>
                     <div className="mt-6 flex gap-3 flex-wrap">
-                        <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/game/${currentGame.slug}`}>View Deck</Link>
+                        <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${currentGame.slug}`}>View Deck</Link>
                         <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link>
                     </div>
                 </div>
