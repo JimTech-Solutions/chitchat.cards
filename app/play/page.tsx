@@ -1,9 +1,5 @@
 
 "use client"
-import Image from "next/image";
-import Link from "next/link";
-
-import imageUrl from "../../assets/images/thumbnail.webp";
 
 
 // import supabase from '@/utils/initSupabase';

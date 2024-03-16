@@ -1,5 +1,5 @@
 import React from 'react'
-import imageUrl from "../assets/images/thumbnail.webp";
+// import imageUrl from "../assets/images/sample.webp";
 
 
 // import supabase from '@/utils/initSupabase';
@@ -114,7 +114,7 @@ const PopularDeckSection = () => {
                         return (
                             <Link href={`/play/${game.slug}`} key={index}>
                                 <div className="rounded-lg relative hover:scale-[1.05] duration-300 m-5">
-                                    <Image src={imageUrl} alt="Soul Searchers Game" className="rounded-xl" />
+                                    <Image src={game.thumbnail} alt="Soul Searchers Game" className="rounded-xl" width={400} height={200}/>
 
                                     <div className="bg-black bg-opacity-50 p-5 absolute bottom-0 w-full rounded-b-lg">
                                         <p className="text-lg font-bold mb-2">{game.title}</p>
