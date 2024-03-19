@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
 import { IconBase } from 'react-icons';
-import { IoBookmarkOutline, IoChevronDown, IoPlay, IoThumbsUp } from 'react-icons/io5';
+import { IoBookmarkOutline, IoChevronDown, IoClose, IoPlay, IoThumbsUp } from 'react-icons/io5';
 import { FaThumbsUp } from 'react-icons/fa';
 
 import { Game, Categories, Questions } from '@/types/games'
@@ -18,7 +18,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
   const cancelButtonRef = useRef(null)
   return (
     <> 
-    <div className="group relative duration-300 m-5 hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
+    <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)} onTouchMoveCapture={() => setOpen(true)}>
         <div className="relative">
             <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
             <div className="absolute bottom-0 w-full duration-300">
@@ -31,7 +31,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 </div>
             </div>
         </div>
-        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 group-hover:opacity-100 sm:hidden">
+        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 group-hover:opacity-100 sm:hidden md:block">
             <div className="relative">
                 <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
                 <div className="absolute bottom-0 w-full duration-300">
@@ -90,7 +90,11 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-[#151515] text-left shadow-xl transition-all max-w-4xl my-5">
+                <div onClick={() => setOpen(false)} className="absolute right-0 p-4 z-[100] hover:cursor-pointer hover:opacity-50">
+                    <IoClose size={30} className="text-gray-700"/>
+                </div>
                 <div className="relative">
+                    
                     <Image src={game.thumbnail} alt={game.title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
                     <div className="absolute bottom-0 w-full duration-300">
                         <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
