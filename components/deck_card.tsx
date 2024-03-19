@@ -26,12 +26,12 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
                 </div>
                 
-                <div className="rounded-b-xl bg-[#ffd700] mx-auto p-1 text-center group-hover:rounded-b-[0px] duration-300">
+                <div className="rounded-b-xl bg-[#ffd700] mx-auto p-1 text-center md:group-hover:rounded-b-[0px] duration-300">
                     <p className="text-md font-bold text-[#151515]">{game.title}</p>
                 </div>
             </div>
         </div>
-        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 group-hover:opacity-100 sm:hidden md:block">
+        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block">
             <div className="relative">
                 <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
                 <div className="absolute bottom-0 w-full duration-300">
