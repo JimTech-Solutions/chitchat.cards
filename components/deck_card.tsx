@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Fragment, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
@@ -14,8 +14,51 @@ interface DeckCardProps {
 
 const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const [open, setOpen] = useState(false)
+    const cancelButtonRef = useRef(null)
 
-  const cancelButtonRef = useRef(null)
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
+    const modalContentRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+    const handleScroll = (event : any) => {
+        const { scrollTop, scrollHeight, clientHeight } = event.target;
+        if (scrollTop + clientHeight >= scrollHeight || scrollTop === 0) {
+        setOpen(false); // Closes the modal if scrolled to top or bottom
+        }
+    };
+
+    const modalContent = modalContentRef.current;
+    if (modalContent) {
+        modalContent.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+        if (modalContent) {
+        modalContent.removeEventListener('scroll', handleScroll);
+        }
+    };
+    }, []);
+
+    const handleTouchStart = (e : any) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e : any) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 150) {
+        // Swipe Left
+        setOpen(false);
+    }
+
+    if (touchStart - touchEnd < -150) {
+        // Swipe Right
+        setOpen(false);
+    }
+    };
   return (
     <> 
     <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)} onTouchMoveCapture={() => setOpen(true)}>
@@ -78,7 +121,11 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
           <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto"
+            ref={modalContentRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}>
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
