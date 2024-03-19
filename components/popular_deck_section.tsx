@@ -7,7 +7,7 @@ const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL || '', proces
 import Slider from "react-slick";
 import { useEffect, useState } from "react";
 
-import { Game, Categories, Questions } from '@/types/games'
+import { Game, GameData,Categories, Questions } from '@/types/games'
 
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Link from 'next/link';
@@ -16,12 +16,13 @@ import DeckCard from './deck_card';
 
 
 const PopularDeckSection = () => {
-    const [games, setGames] = useState<Game[]>([]);
-    const [currentGame, setCurrentGame] = useState<Game | null>(null);
+    const [games, setGames] = useState<GameData[]>([]);
+    const [currentGame, setCurrentGame] = useState<GameData | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
-            let { data, error } = await supabase.from('games').select('*');
+            // let { data, error } = await supabase.from('games').select('*');
+            let { data, error: error } = await supabase.rpc('fetch_all_games');
             if (error) {
                 console.error('Error loading games:', error);
                 return;
@@ -117,7 +118,7 @@ const PopularDeckSection = () => {
                 {/* </Slider> */}
             </div>
 
-            {currentGame && (
+            {/* {currentGame && (
                 <div className="p-5 hidden">
                     <p className="text-lg mb-3 font-bold">Description</p>
                     <p className="text-md mb-3">{currentGame.long_description}</p>
@@ -133,7 +134,7 @@ const PopularDeckSection = () => {
                         <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link>
                     </div>
                 </div>
-            )}
+            )} */}
         </section>
     )
 }

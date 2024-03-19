@@ -7,9 +7,9 @@ import { IconBase } from 'react-icons';
 import { IoBookmarkOutline, IoChevronDown, IoClose, IoPlay, IoThumbsUp } from 'react-icons/io5';
 import { FaThumbsUp } from 'react-icons/fa';
 
-import { Game, Categories, Questions } from '@/types/games'
+import { Game, GameData, Categories, Questions } from '@/types/games'
 interface DeckCardProps {
-    game: Game;
+    game: GameData;
 }
 
 const DeckCard: React.FC<DeckCardProps> = ({game}) => {
@@ -59,47 +59,49 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         setOpen(false);
     }
     };
+
+    console.log(game)
   return (
     <> 
     <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
         <div className="relative">
-            <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
+            <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
             <div className="absolute bottom-0 w-full duration-300">
                 <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                     <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
                 </div>
                 
                 <div className="rounded-b-xl bg-[#ffd700] mx-auto p-1 text-center md:group-hover:rounded-b-[0px] duration-300">
-                    <p className="text-md font-bold text-[#151515]">{game.title}</p>
+                    <p className="text-md font-bold text-[#151515]">{game.game_title}</p>
                 </div>
             </div>
         </div>
-        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block">
+        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block ">
             <div className="relative">
-                <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
+                <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
                 <div className="absolute bottom-0 w-full duration-300">
                     <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                         <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
                     </div>
                     
                     <div className="rounded-b-xl bg-[#ffd700] mx-auto p-1 text-center group-hover:rounded-b-[0px] duration-300">
-                        <p className="text-md font-bold text-[#151515]">{game.title}</p>
+                        <p className="text-md font-bold text-[#151515]">{game.game_title}</p>
                     </div>
                 </div>
             </div>
             <div className="rounded-b-xl relative w-full bg-[#181818] p-4 hidden group-hover:block duration-300">
                 <div className="flex gap-2 mb-4 justify-between"> 
                     <div className="flex gap-2"> 
-                        <button className="bg-black hover:opacity-50 p-2 rounded-full border-2 border-[##e7e7e7]"><IoPlay size={24}/></button>
+                        <Link href={`/play/${game.game_slug}`} className="bg-black hover:opacity-50 p-2 rounded-full border-2 border-[##e7e7e7]"><IoPlay size={24}/></Link>
                         <button className="bg-black hover:opacity-50  p-2 rounded-full border-2 border-[##e7e7e7] text-[##e7e7e7]"><IoBookmarkOutline size={24}/></button>
                     </div>
                     <div>
                         <button className="bg-black hover:opacity-50 p-2 rounded-full border-2 border-[##e7e7e7] text-[##e7e7e7]" onClick={() => setOpen(true)}><IoChevronDown size={24}/></button>
                     </div>
                 </div>
-                <p className="text-md ">{game.long_description}</p>
+                <p className="text-md ">{game.game_long_description}</p>
                 <div className="flex gap-2 mt-2"> 
-                    {game.recommended.map((x, index) => {
+                    {game.game_recommended.map((x, index) => {
                         return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
                     })}
 
@@ -142,14 +144,14 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 </div>
                 <div className="relative">
                     
-                    <Image src={game.thumbnail} alt={game.title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
+                    <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
                     <div className="absolute bottom-0 w-full duration-300">
                         <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                             <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
                         </div>
                         
                         <div className=" bg-[#ffd700] mx-auto p-1 text-center group-hover:rounded-b-[0px] duration-300">
-                            <p className="text-md font-bold text-[#151515]">{game.title}</p>
+                            <p className="text-md font-bold text-[#151515]">{game.game_title}</p>
                         </div>
                     </div>
                 </div>
@@ -161,16 +163,16 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <div className="mt-3  sm:ml-4 sm:mt-0 sm:text-left">
                      <div className="p-4">
                         <p className="text-lg mb-3 font-bold">Description</p>
-                        <p className="text-md mb-3">{game.long_description}</p>
-                        <p className="mb-3">Number of Cards: 50/100</p>
+                        <p className="text-md mb-3">{game.game_long_description}</p>
+                        <p className="mb-3">Number of Questions: {game.total_questions}/{game.total_questions}</p>
                         <p className="mb-3">Recommended for:</p>
                         <div className="flex gap-3">
-                            {game.recommended.map((x, index) => {
+                            {game.game_recommended.map((x, index) => {
                                 return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
                             })}
                         </div>
                         <div className="mt-6 flex gap-3 flex-wrap">
-                            <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.slug}`}>View Deck</Link>
+                            <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.game_slug}`}>View Deck</Link>
                             <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link>
                         </div>
                     </div>
