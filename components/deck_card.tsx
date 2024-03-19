@@ -7,9 +7,13 @@ import { IconBase } from 'react-icons';
 import { IoBookmarkOutline, IoChevronDown, IoPlay, IoThumbsUp } from 'react-icons/io5';
 import { FaThumbsUp } from 'react-icons/fa';
 
+import { Game, Categories, Questions } from '@/types/games'
+interface DeckCardProps {
+    game: Game;
+}
 
-const DeckCard = ({game}) => {
-     const [open, setOpen] = useState(false)
+const DeckCard: React.FC<DeckCardProps> = ({game}) => {
+    const [open, setOpen] = useState(false)
 
   const cancelButtonRef = useRef(null)
   return (
