@@ -1,8 +1,4 @@
 import React from 'react'
-// import imageUrl from "../assets/images/sample.webp";
-
-
-// import supabase from '@/utils/initSupabase';
 
 import { createClient } from '@supabase/supabase-js'
 
@@ -16,6 +12,7 @@ import { Game, Categories, Questions } from '@/types/games'
 import { GrNext, GrPrevious } from "react-icons/gr";
 import Link from 'next/link';
 import Image from "next/image";
+import DeckCard from './deck_card';
 
 
 const PopularDeckSection = () => {
@@ -77,9 +74,9 @@ const PopularDeckSection = () => {
         autoplay: true,
         speed: 500,
         autoplaySpeed: 3500,
-        cssEase: "linear",
         pauseOnHover: true,
-        arrows: true,
+        arrows: false,
+        swipeToSlide: true,
         nextArrow: <NextArrow className="" />,
         prevArrow: <PrevArrow className="" />,
         beforeChange: (oldIndex: number, newIndex: number) => {
@@ -108,29 +105,20 @@ const PopularDeckSection = () => {
         <section>
             <h2 className="text-2xl font-bold mb-4 text-center">POPULAR DECKS</h2>
 
-            <div className="slider-container ">
-                <Slider {...settings}>
+            <div className="slider-container grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+                {/* <Slider {...settings}> */}
                     {games.map((game, index) => {
                         return (
-                            <Link href={`/play/${game.slug}`} key={index}>
-                                <div className="rounded-lg relative hover:scale-[1.05] duration-300 m-5">
-                                    <Image src={game.thumbnail} alt="Soul Searchers Game" className="rounded-xl" width={400} height={200}/>
-
-                                    <div className="bg-black bg-opacity-50 p-5 absolute bottom-0 w-full rounded-b-lg">
-                                        <p className="text-lg font-bold mb-2">{game.title}</p>
-                                        <p className="text-md">{game.short_description}</p>
-                                    </div>
-                                </div>
-                            </Link>
+                            <DeckCard game={game} key={index}/>
                         )
 
                     })}
 
-                </Slider>
+                {/* </Slider> */}
             </div>
 
             {currentGame && (
-                <div className="p-5">
+                <div className="p-5 hidden">
                     <p className="text-lg mb-3 font-bold">Description</p>
                     <p className="text-md mb-3">{currentGame.long_description}</p>
                     <p className="mb-3">Number of Cards: 50/100</p>

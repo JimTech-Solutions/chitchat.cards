@@ -12,7 +12,6 @@ const HeroSection = () => {
             <p>Dive into topics that matter and explore each other's worlds — one question at a time.</p>
         </div>
 
-
         <div className="my-10">
             <Link className="w-full text-center text-[#151515] bg-[#FFD700] rounded-lg px-6 py-3 font-semibold text-sm shadow-md  hover:bg-[#e7e7e7]" href="/play">Start your chat</Link>
         </div>
