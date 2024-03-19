@@ -61,7 +61,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     };
   return (
     <> 
-    <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)} onTouchMoveCapture={() => setOpen(true)}>
+    <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
         <div className="relative">
             <Image src={game.thumbnail} alt={game.title} className="rounded-xl" width={500} height={500}/>
             <div className="absolute bottom-0 w-full duration-300">
