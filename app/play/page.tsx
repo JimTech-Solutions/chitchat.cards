@@ -16,6 +16,7 @@ import {Game, Categories, Questions} from '@/types/games'
 import { GrNext, GrPrevious } from "react-icons/gr";
 import PopularDeckSection from "@/components/popular_deck_section";
 import Header from '@/components/Header';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 
 export default function GamePage() {
@@ -24,6 +25,10 @@ export default function GamePage() {
     <main className="min-h-screen">
       <Header />
       <PopularDeckSection />
+
+
+
+      <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>
   );
 }

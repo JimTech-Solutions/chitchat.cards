@@ -9,6 +9,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Slider from "react-slick";
 
 import { Categories, Questions, GameData, GameQuestion, GameCategory} from '@/types/games'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -224,6 +225,9 @@ const Page: React.FC = () => {
                 <HiArrowUturnRight size="24"/>
             </button>
         </div>
+
+
+        <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </section>
   )
 }

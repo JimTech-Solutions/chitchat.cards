@@ -62,7 +62,6 @@ export default function RootLayout({
         <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
         <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
 
-        <GoogleAnalytics gaId="G-X05HE2M1XM" />
       </Head>
       <body className={grandstander.className}>
         {children}
