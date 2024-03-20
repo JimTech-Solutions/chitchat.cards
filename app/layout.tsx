@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   generator: "Next.js",
   manifest: "/manifest.json",
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#151515" }],
+  openGraph: {
+    images: ['https://chitchat.cards/images/thumbnail.png']
+  },
   authors: [
     { name: "JimTech Solutions" },
     {
