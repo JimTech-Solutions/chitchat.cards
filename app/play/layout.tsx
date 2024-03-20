@@ -22,6 +22,8 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#151515" }],
   openGraph: {
+    title: "ChitChat | Deepen Connections with Interactive Conversation Games",
+    description: "Discover ChitChat – the ultimate app for couples and friends looking to strengthen their bonds through interactive games and thought-provoking questions. Engage in meaningful conversations and explore new topics together. Start your journey towards deeper connections today!",
     images: ['https://chitchat.cards/images/thumbnail.png']
   },
   authors: [
