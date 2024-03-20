@@ -25,9 +25,6 @@ export default function GamePage() {
     <main className="min-h-screen">
       <Header />
       <PopularDeckSection />
-
-
-
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>
   );
