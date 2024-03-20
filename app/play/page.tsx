@@ -17,6 +17,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 import PopularDeckSection from "@/components/popular_deck_section";
 import Header from '@/components/Header';
 import { GoogleAnalytics } from '@next/third-parties/google';
+import Head from 'next/head';
 
 
 export default function GamePage() {
