@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section>
       <div className="text-center my-[50px] p-5">
-        <h2 className="text-4xl lg:text-6xl mb-5">Deepen Your Chat<br /><span className="text-[#FFD700]">One Question at a Time</span></h2>
+        <h2 className="text-4xl lg:text-6xl mb-5">Deepen Your Talks<br /><span className="text-[#FFD700]">One Question at a Time</span></h2>
         
         <div className="my-5 text-lg"> 
             <p>ChitChat brings you closer to your loved ones through fun, thought-provoking games and questions.</p> 

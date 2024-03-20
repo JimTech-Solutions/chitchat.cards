@@ -82,7 +82,7 @@ const Header = ({filter = false}) => {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-700 rounded-md bg-[#181818] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none drop-shadow-xl">
                     <div className="py-1">
                       <Menu.Item>
-                        {({ active }) => (
+                        {({ active }: { active: boolean }) => (
                           <a
                             href="#"
                             className={classNames(
@@ -95,7 +95,7 @@ const Header = ({filter = false}) => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
+                        {({ active }: { active: boolean }) => (
                           <a
                             href="#"
                             className={classNames(
@@ -108,7 +108,7 @@ const Header = ({filter = false}) => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
+                        {({ active }: { active: boolean }) => (
                           <a
                             href="#"
                             className={classNames(
@@ -121,7 +121,7 @@ const Header = ({filter = false}) => {
                         )}
                       </Menu.Item>
                       <Menu.Item>
-                        {({ active }) => (
+                        {({ active }: { active: boolean }) => (
                           <a
                             href="#"
                             className={classNames(

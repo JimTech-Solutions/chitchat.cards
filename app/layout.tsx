@@ -42,10 +42,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <Head>
+        <title>ChitChat: Interactive Conversation Games for Better Connections</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <GoogleAnalytics gaId="G-X05HE2M1XM" />
+
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="ChitChat: Interactive Conversation Games for Better Connections" />
+        <meta property="og:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+        <meta property="og:image" content="https://chitchat.cards/images/thumbnail.png" />
+        <meta property="og:url" content="https://chitchat.cards" />
+
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ChitChat: Interactive Conversation Games for Better Connections" />
+        <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+        <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
+
+        <GoogleAnalytics gaId="G-X05HE2M1XM" />
       </Head>
       <body className={grandstander.className}>
         {children}

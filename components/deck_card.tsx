@@ -179,10 +179,10 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                         </div>
                     </div>
                     </div>
-                  </div>
                 </div>
-               
-              </Dialog.Panel>
+                </div>
+
+                </Dialog.Panel>
             </Transition.Child>
           </div>
         </div>
