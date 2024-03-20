@@ -10,6 +10,7 @@ import Slider from "react-slick";
 
 import { Categories, Questions, GameData, GameQuestion, GameCategory} from '@/types/games'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Header from '@/components/Header'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -157,78 +158,80 @@ const Page: React.FC = () => {
     };
 
   return (
-    <section className="flex  flex-col justify-center  relative mt-5">
+    <> 
+        <Header />
+        <section className="flex  flex-col justify-center  relative mt-5">
 
-
-            {loading && (
-                <div className="slider-container my-[150px] xl:my-[300px] flex items-center justify-center"> 
-                    <div className="w-12 h-12 rounded-full animate-spin border-y border-solid border-5 border-yellow-500 border-t-transparent"></div>
-                </div>
-            )}
-            <div className="slider-container my-[100px] xl:my-[250px]">
-                <Slider ref={sliderRef}
-                    {...settings}>
-                    {filteredQuestions.map((question, index) => {
-                        const textColor = getCategoryColor(question.category);
-
-                        return (
-                        <div key={index} className="text-center p-10 my-auto justify-center items-center">
-                                <p className={`mb-3`} style={{ color: textColor }}>{question.category}</p>
-                                <p className="text-2xl">{question.question}</p>
-                        </div>
-                        )
-                    })}
-                </Slider>
-            </div>
-
-    
-        <div className="flex justify-center w-full items-center gap-3 xl:gap-5 mt-20  bottom-20 fixed">
-            <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={previous}>
-                <HiArrowUturnLeft size="24"/>
-            </button>
-
-            <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={handleShuffleButton}>
-                <PiShuffle size="24" />
-            </button>
-
-            <div className="relative" ref={dropdownRef}>
-                <button
-                    className="rounded-2xl p-5 bg-[#272727] hover:opacity-50"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    <CiFilter size={24} />
-                </button>
-
-                {isOpen && (
-                    <div className="absolute z-10 bg-[#272727] border-black rounded-md shadow-lg bottom-full mb-3 p-3 overflow-auto max-h-80 w-[200px] left-[-50px]">
-                    {/* Content of your dropdown */}
-                    <p className="mb-2">Filters</p>
-                    {categoriesData.map((option : GameCategory, index : number) => (
-                        <div key={index} className="flex items-start gap-2">
-                        <input
-                            type="checkbox"
-                            id={option.category}
-                            checked={selectedOptions.some(selectedOption => selectedOption.category === option.category && selectedOption.checked)}
-                            onChange={() => handleFilterChange(option)} // Pass the whole category object
-                            className="form-checkbox min-h-5 min-w-5 text-blue-600"
-                        />
-                        <label className="flex items-center space-x-3cursor-pointer" htmlFor={option.category}>
-                            <span className="flex-1">{option.category} <span className="text-sm">({option.question_count})</span></span>
-                        </label>
-                        </div>
-                    ))}
+                {loading && (
+                    <div className="slider-container my-[150px] xl:my-[300px] flex items-center justify-center"> 
+                        <div className="w-12 h-12 rounded-full animate-spin border-y border-solid border-5 border-yellow-500 border-t-transparent"></div>
                     </div>
                 )}
+                <div className="slider-container my-[100px] xl:my-[250px]">
+                    <Slider ref={sliderRef}
+                        {...settings}>
+                        {filteredQuestions.map((question, index) => {
+                            const textColor = getCategoryColor(question.category);
+
+                            return (
+                            <div key={index} className="text-center p-10 my-auto justify-center items-center">
+                                    <p className={`mb-3`} style={{ color: textColor }}>{question.category}</p>
+                                    <p className="text-2xl">{question.question}</p>
+                            </div>
+                            )
+                        })}
+                    </Slider>
                 </div>
 
-            <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={next}>
-                <HiArrowUturnRight size="24"/>
-            </button>
-        </div>
+        
+            <div className="flex justify-center w-full items-center gap-3 xl:gap-5 mt-20  bottom-20 fixed">
+                <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={previous}>
+                    <HiArrowUturnLeft size="24"/>
+                </button>
+
+                <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={handleShuffleButton}>
+                    <PiShuffle size="24" />
+                </button>
+
+                <div className="relative" ref={dropdownRef}>
+                    <button
+                        className="rounded-2xl p-5 bg-[#272727] hover:opacity-50"
+                        onClick={() => setIsOpen(!isOpen)}
+                    >
+                        <CiFilter size={24} />
+                    </button>
+
+                    {isOpen && (
+                        <div className="absolute z-10 bg-[#272727] border-black rounded-md shadow-lg bottom-full mb-3 p-3 overflow-auto max-h-80 w-[200px] left-[-50px]">
+                        {/* Content of your dropdown */}
+                        <p className="mb-2">Filters</p>
+                        {categoriesData.map((option : GameCategory, index : number) => (
+                            <div key={index} className="flex items-start gap-2">
+                            <input
+                                type="checkbox"
+                                id={option.category}
+                                checked={selectedOptions.some(selectedOption => selectedOption.category === option.category && selectedOption.checked)}
+                                onChange={() => handleFilterChange(option)} // Pass the whole category object
+                                className="form-checkbox min-h-5 min-w-5 text-blue-600"
+                            />
+                            <label className="flex items-center space-x-3cursor-pointer" htmlFor={option.category}>
+                                <span className="flex-1">{option.category} <span className="text-sm">({option.question_count})</span></span>
+                            </label>
+                            </div>
+                        ))}
+                        </div>
+                    )}
+                    </div>
+
+                <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50" onClick={next}>
+                    <HiArrowUturnRight size="24"/>
+                </button>
+            </div>
 
 
-        <GoogleAnalytics gaId="G-X05HE2M1XM" />
-    </section>
+            <GoogleAnalytics gaId="G-X05HE2M1XM" />
+        </section>
+    </>
   )
 }
 

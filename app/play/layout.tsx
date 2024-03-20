@@ -42,9 +42,9 @@ export default function GameLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-      {/* <Header /> */}
-      <title>ChitChat: Interactive Conversation Games for Better Connections</title>
+    <> 
+      <Head> 
+        <title>ChitChat: Interactive Conversation Games for Better Connections</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -61,8 +61,12 @@ export default function GameLayout({
         <meta name="twitter:title" content="ChitChat: Interactive Conversation Games for Better Connections" />
         <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
         <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
-      {children}
-    </main>
+      </Head>
+      <main>
+        
+        {children}
+      </main>
+    </>
   )
 
 }
