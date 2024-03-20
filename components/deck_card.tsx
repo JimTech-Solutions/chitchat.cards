@@ -166,16 +166,16 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                      <div className="p-4">
                         <p className="text-lg mb-3 font-bold">Description</p>
                         <p className="text-md mb-3">{parse(game.game_long_description)}</p>
-                        <p className="mb-3">Number of Questions: {game.total_questions}/{game.total_questions}</p>
+                        <p className="mb-3">Number of Questions: {game.total_questions}</p>
                         <p className="mb-3">Recommended for:</p>
                         <div className="flex gap-3">
                             {game.game_recommended.map((x, index) => {
                                 return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
                             })}
                         </div>
-                        <div className="mt-6 flex gap-3 flex-wrap">
+                        <div className="my-6 flex gap-3 flex-wrap">
                             <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.game_slug}`}>View Deck</Link>
-                            <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link>
+                            {/* <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock All Decks</Link> */}
                         </div>
                     </div>
                     </div>

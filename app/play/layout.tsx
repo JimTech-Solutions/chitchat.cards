@@ -43,7 +43,7 @@ export default function GameLayout({
 }>) {
   return (
     <main>
-      <Header />
+      {/* <Header /> */}
       {children}
     </main>
   )

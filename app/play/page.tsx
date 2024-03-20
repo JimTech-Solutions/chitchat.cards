@@ -15,15 +15,15 @@ import {Game, Categories, Questions} from '@/types/games'
 
 import { GrNext, GrPrevious } from "react-icons/gr";
 import PopularDeckSection from "@/components/popular_deck_section";
+import Header from '@/components/Header';
 
 
 export default function GamePage() {
   
   return (
     <main className="min-h-screen">
-      
+      <Header />
       <PopularDeckSection />
-      
     </main>
   );
 }
