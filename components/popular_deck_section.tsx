@@ -103,7 +103,7 @@ const PopularDeckSection = () => {
         ]
     };
     return (
-        <section>
+        <section className="mb-[120px]">
             <h2 className="text-2xl font-bold mb-4 text-center">POPULAR DECKS</h2>
 
             <div className="slider-container grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">

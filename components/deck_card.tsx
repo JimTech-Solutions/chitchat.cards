@@ -7,6 +7,8 @@ import { IconBase } from 'react-icons';
 import { IoBookmarkOutline, IoChevronDown, IoClose, IoPlay, IoThumbsUp } from 'react-icons/io5';
 import { FaThumbsUp } from 'react-icons/fa';
 
+import parse from 'html-react-parser';
+
 import { Game, GameData, Categories, Questions } from '@/types/games'
 interface DeckCardProps {
     game: GameData;
@@ -99,7 +101,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                         <button className="bg-black hover:opacity-50 p-2 rounded-full border-2 border-[##e7e7e7] text-[##e7e7e7]" onClick={() => setOpen(true)}><IoChevronDown size={24}/></button>
                     </div>
                 </div>
-                <p className="text-md ">{game.game_long_description}</p>
+                <p className="text-md ">{game.game_short_description}</p>
                 <div className="flex gap-2 mt-2"> 
                     {game.game_recommended.map((x, index) => {
                         return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
@@ -163,7 +165,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <div className="mt-3  sm:ml-4 sm:mt-0 sm:text-left">
                      <div className="p-4">
                         <p className="text-lg mb-3 font-bold">Description</p>
-                        <p className="text-md mb-3">{game.game_long_description}</p>
+                        <p className="text-md mb-3">{parse(game.game_long_description)}</p>
                         <p className="mb-3">Number of Questions: {game.total_questions}/{game.total_questions}</p>
                         <p className="mb-3">Recommended for:</p>
                         <div className="flex gap-3">
