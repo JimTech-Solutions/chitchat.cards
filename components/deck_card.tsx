@@ -141,9 +141,9 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-[#151515] text-left shadow-xl transition-all max-w-4xl my-5">
-                <div onClick={() => setOpen(false)} className="absolute right-0 p-4 z-[100] hover:cursor-pointer hover:opacity-50">
-                    <IoClose size={30} className="text-gray-700"/>
-                </div>
+                <button onClick={() => setOpen(false)} className="absolute right-0 p-2 z-[100] hover:cursor-pointer hover:opacity-80 bg-[#151515] rounded-full m-3">
+                    <IoClose size={24} className="text-gray-200"/>
+                </button>
                 <div className="relative">
                     
                     <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>

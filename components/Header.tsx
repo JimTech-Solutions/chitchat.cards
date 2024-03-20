@@ -50,11 +50,11 @@ const Header = ({filter = false}) => {
             </Link>
 
             {filter ? (
-              <button className="rounded-2xl p-5 bg-[#272727]">
+              <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50">
                   <CiFilter size="24" />
               </button>
             ) : (
-              <button className="rounded-2xl p-5 bg-[#272727]">
+              <button className="rounded-2xl p-5 bg-[#272727] hover:opacity-50">
                   <CiUser size="24" />
               </button>
             )}
