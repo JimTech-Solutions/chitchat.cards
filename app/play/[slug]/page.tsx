@@ -11,6 +11,7 @@ import Slider from "react-slick";
 import { Categories, Questions, GameData, GameQuestion, GameCategory} from '@/types/games'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Header from '@/components/Header'
+import Head from 'next/head'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -159,6 +160,25 @@ const Page: React.FC = () => {
 
   return (
     <> 
+        <Head>
+            <title>ChitChat: Interactive Conversation Games for Better Connections</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+            <link rel="icon" href="/favicon.ico" sizes="any" />
+            <meta name="description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="ChitChat: Interactive Conversation Games for Better Connections" />
+            <meta property="og:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+            <meta property="og:image" content="https://chitchat.cards/images/thumbnail.png" />
+            <meta property="og:url" content="https://chitchat.cards" />
+
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="ChitChat: Interactive Conversation Games for Better Connections" />
+            <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
+            <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
+        </Head>
         <Header />
         <section className="flex  flex-col justify-center  relative mt-5">
 
