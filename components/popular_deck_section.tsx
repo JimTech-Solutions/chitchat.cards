@@ -22,7 +22,7 @@ const PopularDeckSection = () => {
     useEffect(() => {
         const fetchData = async () => {
             // let { data, error } = await supabase.from('games').select('*');
-            let { data, error: error } = await supabase.rpc('fetch_all_games');
+            let { data, error: error } = await supabase.rpc('fetch_all_games', {filter: 'public'});
             if (error) {
                 console.error('Error loading games:', error);
                 return;
@@ -102,6 +102,7 @@ const PopularDeckSection = () => {
 
         ]
     };
+
     return (
         <section className="mb-[120px]">
             <h2 className="text-2xl font-bold mb-4 text-center">POPULAR DECKS</h2>

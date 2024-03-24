@@ -6,10 +6,13 @@ import Image from "next/image";
 import { IconBase } from 'react-icons';
 import { IoBookmarkOutline, IoChevronDown, IoClose, IoPlay, IoThumbsUp } from 'react-icons/io5';
 import { FaThumbsUp } from 'react-icons/fa';
+import Slider from "react-slick";
 
 import parse from 'html-react-parser';
 
-import { Game, GameData, Categories, Questions } from '@/types/games'
+import { Game, GameData, Categories, Questions, GameCategory } from '@/types/games'
+import { LockClosedIcon } from '@heroicons/react/20/solid';
+import { GrNext, GrPrevious } from 'react-icons/gr';
 interface DeckCardProps {
     game: GameData;
 }
@@ -62,12 +65,77 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     }
     };
 
-    console.log(game)
+    // console.log(game)
+
+    function NextArrow(props: any) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={` absolute top-0 right-0 p-4  h-full`}
+                style={{ ...style, }}
+                
+            >
+                <div className="h-full flex items-center justify-center">
+                    <div className="z-[10] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                        <GrNext className="text-center text-[#e7e7e7]" size="16" />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    function PrevArrow(props: any) {
+        const { className, style, onClick } = props;
+        return (
+            <div
+                className={`absolute top-0 left-0 p-4  h-full`}
+                style={{ ...style, }}
+            >
+                <div className="h-full flex items-center justify-center">
+                    <div className="z-[10] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                        <GrPrevious className="mx-auto text-center text-[#e7e7e7]" size="16" />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const getCategoryColor = (category: string) => {
+        // const foundCategory = game.game_categories.find((cat : GameCategory) => cat.category == category);
+        // return foundCategory ? foundCategory.color : 'white'; 
+        return 'white';
+    };
+
+    const settings = {
+        dots: true,
+        speed: 500,
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipeToSlide: true,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
+    };
   return (
     <> 
     <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
         <div className="relative">
             <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
+            
+            {game.game_access === 'free' ? (<div className="absolute top-0 right-0 duration-300">
+                <div className="rounded-full bg-[green] py-1 px-3 m-2">
+                    <p className="text-sm  text-[white] text-center ">Open</p>
+                </div>
+            </div>) : 
+            (<div className="absolute top-0 right-0 duration-300">
+                <div className="rounded-full bg-gray-500 py-1 px-3 m-2">
+                    <p className="text-sm  text-[white] text-center ">
+                    Locked
+                    </p>
+                </div>
+            </div>) 
+            }
+            
             <div className="absolute bottom-0 w-full duration-300">
                 <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                     <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
@@ -81,6 +149,19 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block ">
             <div className="relative">
                 <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
+                {game.game_access === 'free' ? (<div className="absolute top-0 right-0 duration-300">
+                    <div className="rounded-full bg-[green] py-1 px-3 m-2">
+                        <p className="text-sm  text-[white] text-center ">Open</p>
+                    </div>
+                    </div>) : 
+                    (<div className="absolute top-0 right-0 duration-300">
+                        <div className="rounded-full bg-gray-500 py-1 px-3 m-2">
+                            <p className="text-sm  text-[white] text-center ">
+                            Locked
+                            </p>
+                        </div>
+                    </div>) 
+                }
                 <div className="absolute bottom-0 w-full duration-300">
                     <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                         <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
@@ -145,8 +226,31 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <IoClose size={24} className="text-gray-200"/>
                 </button>
                 <div className="relative">
-                    
-                    <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
+
+                    <div className="slider-container ">
+                        <Slider {...settings}>
+                            <div> 
+                            <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
+
+                            </div>
+
+                            {game.game_questions
+                            .filter(question => question.featured)
+                            .map(question => {
+                                const textColor = getCategoryColor(question.category);
+                                return(
+                                    <div className="text-center p-10 translate-y-[50%]" >
+                                        <div className=" bg-opacity-50 p-5 rounded-xl w-[80%] mx-auto "> 
+                                            <p className={`mb-3`} style={{ color: textColor }}>{question.category}</p>
+                                            <p className="text-2xl">{question.question}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                            }
+                        </Slider>
+                    </div>
+
                     <div className="absolute bottom-0 w-full duration-300">
                         <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                             <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>

@@ -32,11 +32,15 @@ export type GameData = {
   total_questions: number;
   game_questions: GameQuestion[];
   game_categories: GameCategory[];
+  game_privacy: string;
+  game_access: string;
 };
 
 export type GameQuestion = {
   question: string;
   category: string;
+  access: string;
+  featured: boolean;
 };
 
 export type GameCategory = {
