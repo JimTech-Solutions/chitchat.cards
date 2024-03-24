@@ -24,25 +24,32 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
     const modalContentRef = useRef<HTMLDivElement>(null);
+    const [categoriesData, setCategoriesData] = useState<Categories[] | any>([]);
 
     useEffect(() => {
-    const handleScroll = (event : any) => {
-        const { scrollTop, scrollHeight, clientHeight } = event.target;
-        if (scrollTop + clientHeight >= scrollHeight || scrollTop === 0) {
-        setOpen(false); // Closes the modal if scrolled to top or bottom
-        }
-    };
+        setCategoriesData(game.game_categories);
+    }, [game.game_categories])
 
-    const modalContent = modalContentRef.current;
-    if (modalContent) {
-        modalContent.addEventListener('scroll', handleScroll);
-    }
 
-    return () => {
+    useEffect(() => {
+        const handleScroll = (event : any) => {
+            const { scrollTop, scrollHeight, clientHeight } = event.target;
+            if (scrollTop + clientHeight >= scrollHeight || scrollTop === 0) {
+            setOpen(false); // Closes the modal if scrolled to top or bottom
+            }
+        };
+
+        const modalContent = modalContentRef.current;
         if (modalContent) {
-        modalContent.removeEventListener('scroll', handleScroll);
+            modalContent.addEventListener('scroll', handleScroll);
         }
-    };
+
+        return () => {
+            if (modalContent) {
+            modalContent.removeEventListener('scroll', handleScroll);
+            }
+        };
+
     }, []);
 
     const handleTouchStart = (e : any) => {
@@ -101,9 +108,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     }
 
     const getCategoryColor = (category: string) => {
-        // const foundCategory = game.game_categories.find((cat : GameCategory) => cat.category == category);
-        // return foundCategory ? foundCategory.color : 'white'; 
-        return 'white';
+        const foundCategory = categoriesData?.find((cat : GameCategory) => cat.category == category);
+        return foundCategory ? foundCategory.color : 'white'; 
     };
 
     const settings = {
