@@ -1,5 +1,4 @@
 
-"use client"
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import PopularDeckSection from "@/components/popular_deck_section";
@@ -12,16 +11,22 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { CiLogin } from "react-icons/ci";
 import { IoLogIn, IoLogInOutline } from "react-icons/io5";
 
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+
 import SignUpForm from "@/components/(auth)/signup_form";
 
 
-export default function Home() {
+import { redirect } from 'next/navigation';
+import { getAuthUser } from '@/app/supabase-server';
+import SocialButtons from "@/components/(auth)/socials_buttons";
 
-  
+
+export default async function Home() {
+  const user = await getAuthUser();
+
+  if (user) {
+      redirect('/play');
+  }
+
   return (
     <main className="min-h-screen">
       <Head>
@@ -62,14 +67,7 @@ export default function Home() {
                 <p className="text-md">Welcome to ChitChat!</p>
                 <p className="text-md">Sign up to create your account.</p>
                 
-                <div className="my-4"> 
-                    <button className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center text-[blue]">
-                            <FaFacebook /> Sign in with Facebook
-                    </button>
-                    <button className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center">
-                            <FaGoogle /> Sign in with Google
-                    </button>
-                </div>
+                <SocialButtons />
                 
                 <div className="relative flex py- items-center">
                     <div className="flex-grow border-t border-gray-400"></div>

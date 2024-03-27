@@ -1,5 +1,4 @@
 
-"use client"
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import PopularDeckSection from "@/components/popular_deck_section";
@@ -13,9 +12,17 @@ import { CiLogin } from "react-icons/ci";
 import { IoLogIn, IoLogInOutline } from "react-icons/io5";
 import SignInForm from "@/components/(auth)/singin_form";
 
+import { redirect } from 'next/navigation';
+import { getAuthUser } from '@/app/supabase-server';
+import SocialButtons from "@/components/(auth)/socials_buttons";
 
-export default function Home() {
 
+export default async function SignIn() {
+  const user = await getAuthUser();
+
+  if (user) {
+      redirect('/play');
+  }
   
   return (
     <main className="min-h-screen">
@@ -40,7 +47,6 @@ export default function Home() {
       </Head>
 
       <div className="flex justify-center items-center min-h-screen"> 
-        <div></div>
         
         <div className="bg-[#1d1d1d] px-8 py-10 m-3 rounded-xl sm:min-w-[100%] md:min-w-[500px]">
             <div className="mb-4 text-center"> 
@@ -57,15 +63,8 @@ export default function Home() {
                 <p className="text-md">Welcome to ChitChat!</p>
                 <p className="text-md">Sign in to your account to continue.</p>
                 
-                <div className="my-4"> 
-                    <button className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center text-[blue]">
-                            <FaFacebook /> Sign in with Facebook
-                    </button>
-                    <button className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center">
-                            <FaGoogle /> Sign in with Google
-                    </button>
-                </div>
-                
+                <SocialButtons />
+              
                 <div className="relative flex py- items-center">
                     <div className="flex-grow border-t border-gray-400"></div>
                     <span className="flex-shrink mx-4 text-gray-400 text-sm">or with Email</span>

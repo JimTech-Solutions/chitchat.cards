@@ -1,7 +1,5 @@
 
 "use client"
-
-
 // import supabase from '@/utils/initSupabase';
 
 import { createClient } from '@supabase/supabase-js'
@@ -43,7 +41,6 @@ export default function GamePage() {
         <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
         <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
       </Head>
-
       <Header />
       <PopularDeckSection />
       <GoogleAnalytics gaId="G-X05HE2M1XM" />

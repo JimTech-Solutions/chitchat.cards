@@ -3,9 +3,6 @@ import { cookies } from 'next/headers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { createClient } from '@supabase/supabase-js';
 
-// import { Database } from '@/types/db';
-// import { User } from '@/types/main';
-
 export const createServerSupabaseClient = cache(() => createServerComponentClient({ cookies }));
 
 export async function getSupabaseSession() {
@@ -28,12 +25,9 @@ export async function getAuthUser() {
             data: { user },
         } = await supabase.auth.getUser();
 
-        const { data: userProfile } = await supabase.from('user_profiles').select('*').eq('uid', user?.id).single();
-
         // Combine the data from both sources
         const combinedInfo = {
-            ...user,
-            user_profile: userProfile,
+            ...user
         };
 
         if (!user) {
