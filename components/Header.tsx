@@ -68,9 +68,6 @@ const Header = ({filter = false}) => {
   };
 }, []);
 
-
-  console.log(user);
-
   return (
     <header className=" flex justify-between w-full p-5">
         <div className="flex justify-between w-full items-center">
@@ -114,14 +111,16 @@ const Header = ({filter = false}) => {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-700 rounded-md bg-[#181818] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none drop-shadow-xl ">
                     <div className="py-1">
 
-                      <div className="p-3 px-5 text-wrap w-full">
-                        <p className="text-sm ">
-                          {user && user.user_metadata.first_name}
-                        </p> 
-                        <span className="text-xs"> 
-                          {user && user.email}
-                        </span>
-                      </div>
+                      {user && (
+                        <div className="p-3 px-5 text-wrap w-full">
+                          <p className="text-sm ">
+                            {user.user_metadata.first_name}
+                          </p> 
+                          <span className="text-xs"> 
+                            {user.email}
+                          </span>
+                        </div>
+                      )}
 
                       {!user && (
                         <Menu.Item>
