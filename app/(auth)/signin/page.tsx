@@ -11,6 +11,7 @@ import ChitChatIcon from '@/assets/icons/logo_icon.svg'
 import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { CiLogin } from "react-icons/ci";
 import { IoLogIn, IoLogInOutline } from "react-icons/io5";
+import SignInForm from "@/components/(auth)/singin_form";
 
 
 export default function Home() {
@@ -71,38 +72,8 @@ export default function Home() {
                     <div className="flex-grow border-t border-gray-400"></div>
                 </div>
             </div>
-            <div className="mb-3">
-                <label htmlFor="email" className="block text-sm font-medium leading-6">
-                    Email
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                    <input
-                    type="email"
-                    name="Email"
-                    id="email"
-                    className="block w-full rounded-md border-0 py-2 px-4 ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                    placeholder="Enter Email"
-                    />
-                </div>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="block text-sm font-medium leading-6">
-                    Password
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                    <input
-                    type="password"
-                    name="Password"
-                    id="password"
-                    className="block w-full rounded-md border-0 py-2 px-4 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                    placeholder="Enter Password"
-                    />
-                </div>
-                <Link className="text-sm float-right mb-3 mt-1 hover:text-primary" href="#">Forgot Password?</Link>
-            </div>
-            <button type="button" className="w-full text-center text-[#151515] bg-primary rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80 flex gap-1 items-center justify-center my-4"> <IoLogInOutline size={18}/> Sign in</button>
-
-            <p className="text-center">Don't have an account? <Link href="signup" className="text-primary hover:opacity-80">Sign up.</Link></p>
+            
+            <SignInForm />
         </div>
       </div>
 

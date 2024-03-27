@@ -12,6 +12,12 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 import { CiLogin } from "react-icons/ci";
 import { IoLogIn, IoLogInOutline } from "react-icons/io5";
 
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import SignUpForm from "@/components/(auth)/signup_form";
+
 
 export default function Home() {
 
@@ -72,82 +78,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex gap-2 justify-between mb-3">
-                <div className="w-full">
-                    <label htmlFor="first_name" className="block text-sm font-medium leading-6">
-                        First Name
-                    </label>
-                    <div className="relative mt-2 rounded-md shadow-sm">
-                        <input
-                        type="text"
-                        name="last_name"
-                        id="first_name"
-                        className="block w-full rounded-md border-0 py-2 px-4 ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                        placeholder="Enter First Name"
-                        />
-                    </div>
-                </div>
-                <div className=" w-full">
-                    <label htmlFor="last_name" className="block text-sm font-medium leading-6">
-                        Last Name
-                    </label>
-                    <div className="relative mt-2 rounded-md shadow-sm">
-                        <input
-                        type="text"
-                        name="last_name"
-                        id="last_name"
-                        className="block w-full rounded-md border-0 py-2 px-4 ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                        placeholder="Enter First Name"
-                        />
-                    </div>
-                </div>
-
-            </div>
-            <div className="mb-3">
-                <label htmlFor="email" className="block text-sm font-medium leading-6">
-                    Email
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                    <input
-                    type="email"
-                    name="Email"
-                    id="email"
-                    className="block w-full rounded-md border-0 py-2 px-4 ring-1 ring-inset ring-gray-300 bg-transparent placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                    placeholder="Enter Email"
-                    />
-                </div>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="block text-sm font-medium leading-6">
-                    Password
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                    <input
-                    type="password"
-                    name="Password"
-                    id="password"
-                    className="block w-full rounded-md border-0 py-2 px-4 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                    placeholder="Enter Password"
-                    />
-                </div>
-            </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="block text-sm font-medium leading-6">
-                    Confirm Password
-                </label>
-                <div className="relative mt-2 rounded-md shadow-sm">
-                    <input
-                    type="password"
-                    name="Password"
-                    id="password"
-                    className="block w-full rounded-md border-0 py-2 px-4 bg-transparent ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-300 sm:text-sm sm:leading-6"
-                    placeholder="Confirm Password"
-                    />
-                </div>
-            </div>
-            <button type="button" className="w-full text-center text-[#151515] bg-primary rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80 flex gap-1 items-center justify-center my-4"> <IoLogInOutline size={18}/> Sign up</button>
-
-            <p className="text-center">Already have an account? <Link href="signin" className="text-primary hover:opacity-80">Sign in.</Link></p>
+            <SignUpForm />
         </div>
       </div>
 

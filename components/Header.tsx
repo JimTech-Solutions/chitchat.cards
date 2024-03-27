@@ -83,7 +83,7 @@ const Header = ({filter = false}) => {
                       <Menu.Item>
                         {({ active }: { active: boolean }) => (
                           <a
-                            href="#"
+                            href="/signin"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
                               'block px-4 py-2 text-sm'
