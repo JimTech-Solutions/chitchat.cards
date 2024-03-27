@@ -31,3 +31,11 @@ body {
   transform: scale(1.05);
   transition-duration: 700ms;
 }
+
+.text-primary {
+  color: #ffd700 !important;
+}
+
+.bg-primary {
+  background: #ffd700 !important;
+}

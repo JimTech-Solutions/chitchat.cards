@@ -53,7 +53,6 @@ const Header = ({filter = false}) => {
                 <p className={`text-3xl ${grandstander.className} tracking-[0.05em]`} >
                   Chit<span className="text-[#FFD700]">Chat</span>
                 </p>
-                
               </div>
             </Link>
 

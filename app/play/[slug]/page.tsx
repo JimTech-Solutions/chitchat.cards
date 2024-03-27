@@ -85,8 +85,20 @@ const Page: React.FC = () => {
             setLoading(false);
             return;
         } else {
+
             const gameData: GameData = result as GameData;
             console.log(gameData);
+
+            if (gameData.game_privacy === 'private' ) {
+                router.push('/play')
+                return;
+            }
+
+            // ! If game_access is paid, check whether user has access to the game.
+            if (gameData.game_access === 'paid' ) {
+                router.push('/play')
+                return;
+            }
 
             setGameData(gameData);
             setCategoriesData(gameData.game_categories);
