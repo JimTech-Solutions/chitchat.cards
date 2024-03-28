@@ -84,7 +84,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 
             >
                 <div className="h-full flex items-center justify-center ">
-                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick} onTouchStart={onClick}> 
                         <GrNext className="text-center text-[#e7e7e7]" size="16" />
                     </button>
                 </div>
@@ -100,7 +100,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 style={{ ...style, }}
             >
                 <div className="h-full flex items-center justify-center">
-                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick} onTouchStart={onClick}> 
                         <GrPrevious className="mx-auto text-center text-[#e7e7e7]" size="16" />
                     </button>
                 </div>
