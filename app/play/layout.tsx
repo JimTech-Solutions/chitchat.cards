@@ -6,6 +6,8 @@ import "../globals.css";
 import Header from '@/components/Header';
 import Head from "next/head";
 import { GoogleAnalytics } from '@next/third-parties/google'
+import { Analytics } from "@vercel/analytics/react"
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +52,7 @@ export default function GameLayout({
     <> 
       <main>
         {children}
+        <Analytics />
       </main>
     </>
   )
