@@ -83,10 +83,10 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 style={{ ...style, }}
                 
             >
-                <div className="h-full flex items-center justify-center">
-                    <div className="z-[10] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                <div className="h-full flex items-center justify-center ">
+                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
                         <GrNext className="text-center text-[#e7e7e7]" size="16" />
-                    </div>
+                    </button>
                 </div>
             </div>
         );
@@ -100,9 +100,9 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 style={{ ...style, }}
             >
                 <div className="h-full flex items-center justify-center">
-                    <div className="z-[10] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
+                    <button type="button" className="z-[100] bg-black  bg-opacity-50 rounded-full p-4 rounded-full" onClick={onClick}> 
                         <GrPrevious className="mx-auto text-center text-[#e7e7e7]" size="16" />
-                    </div>
+                    </button>
                 </div>
             </div>
         );
@@ -238,7 +238,6 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                         <Slider {...settings}>
                             <div> 
                             <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl w-100 max-h-[500px] object-cover" width={1000} height={1000}/>
-
                             </div>
 
                             {game.game_questions
@@ -246,8 +245,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                             .map(question => {
                                 const textColor = getCategoryColor(question.category);
                                 return(
-                                    <div className="text-center p-10 translate-y-[50%]" >
-                                        <div className=" bg-opacity-50 p-5 rounded-xl w-[80%] mx-auto "> 
+                                    <div className="text-center p-10 sm:translate-y-[60%] translate-y-[15%]" >
+                                        <div className=" bg-opacity-50 p-5 rounded-xl w-[85%] mx-auto "> 
                                             <p className={`mb-3`} style={{ color: textColor }}>{question.category}</p>
                                             <p className="text-2xl">{question.question}</p>
                                         </div>
