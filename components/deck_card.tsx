@@ -102,14 +102,15 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const createOrder = (data : any, actions : any) => {
 
         return actions.order.create({
-        purchase_units: [
-            {
-            amount: {
-                currency_code: "PHP",
-                value: 249.00, // Use the price prop
+            purchase_units: [{
+                amount: {
+                    currency_code: "PHP",
+                    value: 249.00, // Use the price prop
+                },
+            }],
+            application_context: {
+                shipping_preference: 'NO_SHIPPING' // Disable shipping
             }
-            },
-        ],
         });
     };
 
