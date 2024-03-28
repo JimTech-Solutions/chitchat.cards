@@ -1,6 +1,7 @@
 import { cache } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { createClient } from '@supabase/supabase-js';
+import { useRouter } from 'next/router';
 
 // Instead of using cookies (server-side), use the appropriate client-side storage.
 export const createClientSupabaseClient = cache(() => createClientComponentClient({}));
@@ -63,4 +64,19 @@ export async function getUser() {
         console.error('Error:', error);
         return null;
     }
+}
+
+export async function logOutUser() {
+    const supabase = createClientSupabaseClient();
+    let { error } = await supabase.auth.signOut()
+    
+    if (!error) {
+        // Redirect to the login page or home page as preferred
+        window.location.href = '/play'; // Change '/login.html' to your login page or any other page
+    } else {
+        // Handle the error, maybe show a message to the user
+        console.error('Logout failed', error.message);
+    }
+
+
 }

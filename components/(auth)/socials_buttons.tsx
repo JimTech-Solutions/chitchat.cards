@@ -10,7 +10,14 @@ import { useRouter } from 'next/router';
 
 
 const handleFacebookAuth = async () => {
-    
+    const supabase = createClientComponentClient<any>();
+
+    let { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'facebook'
+    })
+
+    console.log(data);
+    console.log(error);
 }
 
 const handleGoogleAuth = async () => {
@@ -22,7 +29,6 @@ const handleGoogleAuth = async () => {
 
     console.log(data);
     console.log(error);
-
 }
 
 const SocialButtons = () => {

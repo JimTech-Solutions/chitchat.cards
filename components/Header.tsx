@@ -35,7 +35,7 @@ const grandstander = Grandstander({
 import ChitChatIcon from '@/assets/icons/logo_icon.svg'
 
 import Image from 'next/image';
-import { getAuthUser } from '@/app/supabase-client';
+import { getAuthUser, logOutUser} from '@/app/supabase-client';
 import { User } from '@/types/main';
 
 const Header = ({filter = false}) => {
@@ -168,11 +168,12 @@ const Header = ({filter = false}) => {
                         <Menu.Item>
                           {({ active }: { active: boolean }) => (
                             <a
-                              href="/signin"
+                              href="#"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
                                 'block px-4 py-2 text-sm'
                               )}
+                              onClick={logOutUser}
                             >
                               Logout
                             </a>
