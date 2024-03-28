@@ -12,7 +12,7 @@ import { Categories, Questions, GameData, GameQuestion, GameCategory} from '@/ty
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Header from '@/components/Header'
 import Head from 'next/head'
-import { checkUserAccess } from '@/app/supabase-client'
+import { checkUserAccess, getAuthUser } from '@/app/supabase-client'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -74,6 +74,16 @@ const Page: React.FC = () => {
 
     useEffect(() => {
         if (!slug) return; // Do nothing if slug is not yet available
+
+        const checkUser = async () => {
+            const user = await getAuthUser();
+
+            if (!user) {
+                router.push('/signin?redirect='+ pathname);
+            }
+        }
+
+        checkUser();
 
         const fetchQuestions = async () => {
         let { data: result, error: gameError } = await supabase
