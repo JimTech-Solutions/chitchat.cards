@@ -12,6 +12,7 @@ import { Categories, Questions, GameData, GameQuestion, GameCategory} from '@/ty
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Header from '@/components/Header'
 import Head from 'next/head'
+import { checkUserAccess } from '@/app/supabase-client'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -31,7 +32,7 @@ interface SelectedOption {
 
 const Page: React.FC = () => {
     const pathname = usePathname();
-    const slug = pathname.split('/').pop();
+    const slug = pathname?.split('/').pop();
 
 
     const [gameData, setGameData] = useState<any>([])
@@ -39,6 +40,9 @@ const Page: React.FC = () => {
     const [categoriesData, setCategoriesData] = useState<Categories[] | any>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const router = useRouter();
+
+    const [hasAccess, setHasAccess] = useState(false);
+    const [loadingAccessCheck, setLoadingAccessCheck] = useState(false);
 
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -89,16 +93,30 @@ const Page: React.FC = () => {
             const gameData: GameData = result as GameData;
             console.log(gameData);
 
+            const checkAccess = async () => {
+                setLoadingAccessCheck(true);
+                const access = await checkUserAccess(gameData.game_gid);
+                setHasAccess(access);
+                setLoadingAccessCheck(false);
+
+                console.log(gameData.game_gid, access);
+
+                if (!access) {
+                    router.push('/play')
+                    return;
+                }
+            };
+
             if (gameData.game_privacy === 'private' ) {
                 router.push('/play')
                 return;
             }
 
-            // ! If game_access is paid, check whether user has access to the game.
-            if (gameData.game_access === 'paid' ) {
-                router.push('/play')
-                return;
-            }
+            if (gameData.game_access !== 'free') {
+                await checkAccess();
+            } 
+
+
 
             setGameData(gameData);
             setCategoriesData(gameData.game_categories);

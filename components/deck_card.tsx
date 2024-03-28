@@ -14,9 +14,32 @@ import parse from 'html-react-parser';
 import { Game, GameData, Categories, Questions, GameCategory } from '@/types/games'
 import { LockClosedIcon } from '@heroicons/react/20/solid';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+
+import SweetAlert2 from 'react-sweetalert2';
+
+
+import {
+    PayPalScriptProvider,
+    PayPalButtons,
+    usePayPalScriptReducer,
+    PayPalButtonsComponentProps,
+    ReactPayPalScriptOptions
+} from "@paypal/react-paypal-js";
+import { getAuthUser, createClientSupabaseClient, checkUserAccess} from '@/app/supabase-client'
+
+import {GameAccess, Payment} from '@/types/main'
+
+const style : any= {"layout": "horizontal", "color": "black", "label": "pay"};
+
 interface DeckCardProps {
     game: GameData;
 }
+
+const initialOptions : ReactPayPalScriptOptions = {
+    clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID!,
+    currency: "PHP",
+    intent: "capture",
+};
 
 const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const [open, setOpen] = useState(false)
@@ -27,9 +50,32 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const modalContentRef = useRef<HTMLDivElement>(null);
     const [categoriesData, setCategoriesData] = useState<Categories[] | any>([]);
 
+    const [hasAccess, setHasAccess] = useState(false);
+    const [loadingAccessCheck, setLoadingAccessCheck] = useState(false);
+    const [swalProps, setSwalProps] = useState({});
+
+    // console.log(game);
+
     useEffect(() => {
         setCategoriesData(game.game_categories);
     }, [game.game_categories])
+
+    const checkAccess = async () => {
+        setLoadingAccessCheck(true);
+        const access = await checkUserAccess(game.game_gid);
+        setHasAccess(access);
+        setLoadingAccessCheck(false);
+
+        console.log(game.game_gid, access);
+    };
+
+    useEffect(() => {
+        if (game.game_access !== 'free') {
+            checkAccess();
+        } else {
+           
+        }
+    }, [game]);
 
 
     useEffect(() => {
@@ -52,6 +98,86 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         };
 
     }, []);
+
+    const createOrder = (data : any, actions : any) => {
+
+        return actions.order.create({
+        purchase_units: [
+            {
+            amount: {
+                currency_code: "PHP",
+                value: 249.00, // Use the price prop
+            }
+            },
+        ],
+        });
+    };
+
+    const onApprove = (data: any, actions: any) => {
+
+        return actions.order.capture().then(async (details: any) => {
+
+            const supabase = createClientSupabaseClient();
+            const user = await getAuthUser();
+            console.log('User', user)
+            console.log(game.game_gid)
+            console.log('Payment successful!', details);
+
+            // Construct the payment object
+            const payment: Payment = {
+                uid: user?.id,
+                gid: game.game_gid,
+                transaction_id: details.id,
+                transaction_details: details, // Assuming 'details' is the object you want to store
+            };
+
+            // Construct the game access object
+            const gameAccess: GameAccess = {
+                uid: user?.id,
+                gid: game.game_gid,
+                access_type: 'one-time-purchase', 
+                status: 'active', 
+            };
+
+            const { data: paymentData, error: paymentError } = await supabase
+            .from('payments')
+            .insert([payment]);
+
+            const { data: accessData, error: accessError } = await supabase
+            .from('game_access')
+            .insert([gameAccess]);
+
+            if (paymentError) {
+                console.error('Error inserting payment:', paymentError);
+            } else {
+                console.log('Inserted payment:', paymentData);
+            }
+
+            if (accessError) {
+                console.error('Error inserting game access:', accessError);
+            } else {
+                console.log('Inserted game access:', accessData);
+
+                setHasAccess(true);
+
+
+                setSwalProps({
+                    show: true,
+                    title: 'Success! ',
+                    text: 'Your purchase has been confirmed. You may now access the deck!',
+                    customClass: {
+                        container: 'bg-[#151515] text-white',
+                        popup: 'bg-[#151515]',
+                        htmlContainer: 'text-white',
+                        title: 'text-primary',
+                        confirmButton: 'text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80',
+                    },
+                    buttonsStyling: false,
+                });
+            }
+
+        });
+    };
 
     const handleTouchStart = (e : any) => {
     setTouchStart(e.targetTouches[0].clientX);
@@ -123,6 +249,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };
+    
   return (
     <> 
     <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
@@ -134,6 +261,13 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <p className="text-sm  text-[white] text-center ">Open</p>
                 </div>
             </div>) : 
+            hasAccess ? (<div className="absolute top-0 right-0 duration-300">
+                <div className="rounded-full bg-[green] py-1 px-3 m-2">
+                    <p className="text-sm  text-[white] text-center ">
+                    Unlocked
+                    </p>
+                </div>
+            </div>) :
             (<div className="absolute top-0 right-0 duration-300">
                 <div className="rounded-full bg-gray-500 py-1 px-3 m-2">
                     <p className="text-sm  text-[white] text-center ">
@@ -160,6 +294,13 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     <div className="rounded-full bg-[green] py-1 px-3 m-2">
                         <p className="text-sm  text-[white] text-center ">Open</p>
                     </div>
+                    </div>) : 
+                    hasAccess ? (<div className="absolute top-0 right-0 duration-300">
+                        <div className="rounded-full bg-[green] py-1 px-3 m-2">
+                            <p className="text-sm  text-[white] text-center ">
+                            Unlocked
+                            </p>
+                        </div>
                     </div>) : 
                     (<div className="absolute top-0 right-0 duration-300">
                         <div className="rounded-full bg-gray-500 py-1 px-3 m-2">
@@ -194,7 +335,6 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     {game.game_recommended.map((x, index) => {
                         return (<span key={index} className="py-2 px-4 bg-black">{x}</span>);
                     })}
-
                 </div>
             </div>
         </div>
@@ -284,12 +424,26 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                             })}
                         </div>
                         <div className="my-6 flex gap-3 flex-wrap">
-                            {game.game_access === 'free' ? (
+                            {loadingAccessCheck ? (
+                                <p>Loading...</p> // Loading state while checking access
+                            ) : game.game_access === 'free' || hasAccess ? (
                                 <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.game_slug}`}>View Deck</Link>
                             ) : (
-                                <Link className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href="/">Unlock Deck</Link>
+                                <> 
+                                    <p className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md ">Unlock this Deck for Php 249.00 </p>
+                                    <PayPalScriptProvider options={initialOptions}>
+                                        <PayPalButtons
+                                        style={style}
+                                        disabled={false}
+                                        forceReRender={[style]}
+                                        createOrder={createOrder}
+                                        onApprove={onApprove}
+                                        className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md "
+                                        />
+                                    </PayPalScriptProvider>
+                                </>
                             )}
-                        </div>
+                            </div>
                     </div>
                     </div>
                 </div>
@@ -301,6 +455,12 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         </div>
       </Dialog>
     </Transition.Root>
+
+    <SweetAlert2 {...swalProps}
+        didClose={() => {
+            setSwalProps({})
+        }}
+    />
     </>
     
   )

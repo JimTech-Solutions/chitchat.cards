@@ -23,6 +23,7 @@ export interface Game {
 }
 
 export type GameData = {
+  game_gid: UUID;
   game_title: string;
   game_short_description: string;
   game_long_description: string;

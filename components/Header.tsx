@@ -125,7 +125,7 @@ const Header = ({filter = false}) => {
                       {!user && (
                         <Menu.Item>
                           {({ active }: { active: boolean }) => (
-                            <a
+                            <Link
                               href="/signin"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
@@ -133,14 +133,14 @@ const Header = ({filter = false}) => {
                               )}
                             >
                               Login
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ) }
                     
                       <Menu.Item>
                         {({ active }: { active: boolean }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
@@ -148,12 +148,12 @@ const Header = ({filter = false}) => {
                             )}
                           >
                             Request a Feature
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }: { active: boolean }) => (
-                          <a
+                          <Link
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
@@ -161,13 +161,13 @@ const Header = ({filter = false}) => {
                             )}
                           >
                             Contribute
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       {user && (
                         <Menu.Item>
                           {({ active }: { active: boolean }) => (
-                            <a
+                            <Link
                               href="#"
                               className={classNames(
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
@@ -176,7 +176,7 @@ const Header = ({filter = false}) => {
                               onClick={logOutUser}
                             >
                               Logout
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ) }

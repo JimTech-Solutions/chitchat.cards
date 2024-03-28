@@ -66,10 +66,34 @@ export async function getUser() {
     }
 }
 
+export async function checkUserAccess(gid : string) {
+    const supabase = createClientSupabaseClient();
+    const user = await getAuthUser();
+
+    if (!user) {
+        return false;
+    } else {
+        let { data: game_access, error } = await supabase
+        .from('game_access')
+        .select('*')
+        .eq('uid', user.id)
+        .eq('gid', gid)
+        .eq('status', 'active').single()
+
+        if (error) {
+            console.error('Error checking user access:', error);
+            return false;
+        }
+
+        return game_access !== null;
+    }
+
+}
+
 export async function logOutUser() {
     const supabase = createClientSupabaseClient();
     let { error } = await supabase.auth.signOut()
-    
+
     if (!error) {
         // Redirect to the login page or home page as preferred
         window.location.href = '/play'; // Change '/login.html' to your login page or any other page

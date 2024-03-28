@@ -39,3 +39,7 @@ body {
 .bg-primary {
   background: #ffd700 !important;
 }
+
+.paypal-button-label-container img {
+  display: none !important;
+}

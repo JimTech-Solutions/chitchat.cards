@@ -1,3 +1,4 @@
+type UUID = string;
 export interface PageMeta {
   title: string
   description: string
@@ -18,18 +19,22 @@ export interface User {
   updated_at: string | null
 }
 
-export interface Post {
-  id: string /* primary key */
-  title: string
-  content: JSON | null
-  published: boolean
-  created_at: string
-  updated_at: string
-  author_id: string
-}
+export type GameAccess = {
+  id?: number;
+  uid: string | undefined; // Assuming this is a string representation of a UUID
+  gid: string; // Assuming this is a string representation of a UUID
+  access_granted_date?: string; // Or Date, if you prefer
+  access_type: string; // Consider enumerating the possible access types if they are limited
+  status: 'active' | 'expired' | 'revoked'; // Enumerate known statuses as string literal types
+  created_at?: string; // Or Date
+  updated_at?: string; // Or Date
+};
 
-export interface Role {
-  roleid: string /* primary key */
-  rolename: string
-  hierarchylevel: number
-}
+export type Payment = {
+  id?: number;
+  uid: string | undefined; // Assuming this is a string representation of a UUID
+  gid: string; // Assuming this is a string representation of a UUID
+  transaction_id: string;
+  transaction_details: any; // Replace 'any' with a more specific type if you know the structure of your transaction details
+  created_at?: string; // Depending on how you handle dates, you might want to use Date type instead
+};
