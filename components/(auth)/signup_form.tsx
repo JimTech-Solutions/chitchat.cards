@@ -57,8 +57,7 @@ const SignUpForm = () => {
             }
 
             if (response) {
-                // router.push(`/${username}`);
-                router.push(`/`);
+                router.push(`/play`);
             }
         } catch (error) {
             console.log('error', error);

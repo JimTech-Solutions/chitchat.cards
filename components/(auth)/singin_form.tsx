@@ -42,7 +42,7 @@ const SignInForm = () => {
                 throw error;
             }
 
-            router.push('/');
+            router.push('/play');
         } catch (error) {
             console.log('error', error);
             setError('root', {

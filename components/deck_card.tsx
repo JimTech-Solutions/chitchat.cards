@@ -254,7 +254,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
   return (
     <> 
     <div className="group relative duration-300 m-5 md:hover:drop-shadow-xl hover:scale-[1.05]" onClick={() => setOpen(true)}>
-        <div className="relative">
+        <div className="relative z-[-1] md:group-hover:z-99">
             <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
             
             {game.game_access === 'free' ? (<div className="absolute top-0 right-0 duration-300">
@@ -288,8 +288,9 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                 </div>
             </div>
         </div>
-        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block ">
-            <div className="relative">
+
+        <div className="absolute inset-0 flex flex-col justify-between transition duration-300 ease-in-out opacity-0 md:group-hover:opacity-100 sm:hidden md:block shadow-lg !z-[99]">
+            <div className="relative !z-[99]">
                 <Image src={game.game_thumbnail} alt={game.game_title} className="rounded-xl" width={500} height={500}/>
                 {game.game_access === 'free' ? (<div className="absolute top-0 right-0 duration-300">
                     <div className="rounded-full bg-[green] py-1 px-3 m-2">
@@ -311,7 +312,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                         </div>
                     </div>) 
                 }
-                <div className="absolute bottom-0 w-full duration-300">
+                <div className="absolute bottom-0 w-full duration-300 !z-[99]">
                     <div className="rounded-t-lg bg-[red] mx-auto w-[50%] p-1">
                         <p className="text-sm font-bold text-[white] text-center ">Recently Added</p>
                     </div>
@@ -321,8 +322,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                     </div>
                 </div>
             </div>
-            <div className="rounded-b-xl relative w-full bg-[#181818] p-4 hidden group-hover:block duration-300">
-                <div className="flex gap-2 mb-4 justify-between"> 
+            <div className="rounded-b-xl  w-full bg-[#181818] p-4 hidden group-hover:block duration-300 !z-[99]">
+                <div className="flex gap-2 mb-4 justify-between !z-[99]"> 
                     <div className="flex gap-2"> 
                         <Link href={`/play/${game.game_slug}`} className="bg-black hover:opacity-50 p-2 rounded-full border-2 border-[##e7e7e7]"><IoPlay size={24}/></Link>
                         <button className="bg-black hover:opacity-50  p-2 rounded-full border-2 border-[##e7e7e7] text-[##e7e7e7]"><IoBookmarkOutline size={24}/></button>
