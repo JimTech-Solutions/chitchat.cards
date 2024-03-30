@@ -17,7 +17,6 @@ import { GrNext, GrPrevious } from 'react-icons/gr';
 
 import SweetAlert2 from 'react-sweetalert2';
 
-
 import {
     PayPalScriptProvider,
     PayPalButtons,
@@ -27,9 +26,13 @@ import {
 } from "@paypal/react-paypal-js";
 import { getAuthUser, createClientSupabaseClient, checkUserAccess} from '@/app/supabase-client'
 
-import {GameAccess, Payment} from '@/types/main'
+import { Xendit, Invoice as InvoiceClient } from 'xendit-node';
+import { CreateInvoiceRequest, Invoice } from 'xendit-node/invoice/models'
 
-const style : any= {"layout": "horizontal", "color": "black", "label": "pay"};
+import {GameAccess, Payment} from '@/types/main'
+import { useRouter } from 'next/router'
+
+const style : any = {"layout": "horizontal", "color": "black", "label": "pay"};
 
 interface DeckCardProps {
     game: GameData;
@@ -121,15 +124,15 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
             const supabase = createClientSupabaseClient();
             const user = await getAuthUser();
 
-            // Construct the payment object
             const payment: Payment = {
                 uid: user?.id,
                 gid: game.game_gid,
                 transaction_id: details.id,
-                transaction_details: details, // Assuming 'details' is the object you want to store
+                provider: 'paypal',
+                status: details.status,
+                transaction_details: details, 
             };
 
-            // Construct the game access object
             const gameAccess: GameAccess = {
                 uid: user?.id,
                 gid: game.game_gid,
@@ -247,6 +250,63 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };
+
+    const xenditClient = new Xendit({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
+    const { Invoice } = xenditClient
+
+    const xenditInvoiceClient = new InvoiceClient({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
+
+    const data: CreateInvoiceRequest = {
+        "amount" : 249,
+        "externalId" : game.game_title,
+        "description" : "Test Invoice",
+        "currency" : "PHP",
+        "reminderTime" : 1,
+        "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-success`,
+        "failureRedirectUrl" : `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-failed`,
+    }
+
+    const handleXenditButton = async () => {
+        const supabase = createClientSupabaseClient();
+         const user = await getAuthUser();
+
+        const invoice: Invoice = await xenditInvoiceClient.createInvoice({
+            data
+        })
+
+        console.log(invoice);
+
+        const payment: Payment = {
+            uid: user?.id,
+            gid: game.game_gid,
+            transaction_id: invoice.id!,
+            provider: 'xendit',
+            status: invoice.status,
+            transaction_details: invoice, 
+        };
+
+        const gameAccess: GameAccess = {
+            uid: user?.id,
+            gid: game.game_gid,
+            access_type: 'one-time-purchase', 
+            status: 'active', 
+        };
+
+        const { data: paymentData, error: paymentError } = await supabase
+            .from('payments')
+            .insert([payment]);
+
+            // const { data: accessData, error: accessError } = await supabase
+            // .from('game_access')
+            // .insert([gameAccess]);
+
+        if (paymentError) {
+            console.error('Error inserting payment:', paymentError);
+        } else {
+            console.log('Inserted payment:', paymentData);
+            window.location.href = invoice.invoiceUrl;
+        }
+    }
     
   return (
     <> 
@@ -440,6 +500,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                                         className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md "
                                         />
                                     </PayPalScriptProvider>
+                                    <button type="button" className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-sm shadow-md hover:opacity-80" onClick={handleXenditButton}>Xendit</button>
                                 </>
                             )}
                             </div>

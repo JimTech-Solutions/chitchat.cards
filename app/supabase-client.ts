@@ -48,7 +48,7 @@ export async function getUser() {
             throw error;
         }
 
-        console.log('logged id:', data.id);
+        // console.log('logged id:', data.id);
 
         // Then, get the user profile from the public.user_profiles table
         const { data: userProfile } = await supabase.from('user_profiles').select('*').eq('uid', data?.id).single();

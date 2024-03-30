@@ -35,6 +35,8 @@ export type Payment = {
   uid: string | undefined; // Assuming this is a string representation of a UUID
   gid: string; // Assuming this is a string representation of a UUID
   transaction_id: string;
+  provider: string;
+  status: string;
   transaction_details: any; // Replace 'any' with a more specific type if you know the structure of your transaction details
   created_at?: string; // Depending on how you handle dates, you might want to use Date type instead
 };
