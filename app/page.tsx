@@ -3,14 +3,33 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import PopularDeckSection from "@/components/popular_deck_section";
+import WelcomeForm from "@/components/welcome_form";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { StepsProvider } from "react-step-builder";
+import { getAuthUser } from "./supabase-client";
 
 
 
 export default function Home() {
+
+  useEffect(() => {
+    const checkUser = async () => {
+        const user = await getAuthUser();
+        console.log(user);
+
+        if (user) {
+            <StepsProvider> 
+              <WelcomeForm />
+            </StepsProvider>
+        }
+    }
+
+    checkUser();
+  })
 
   
   return (
@@ -39,6 +58,7 @@ export default function Home() {
       <HeroSection />
       <PopularDeckSection />
 
+      <WelcomeForm />
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>

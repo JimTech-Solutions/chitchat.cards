@@ -288,7 +288,8 @@ const Page: React.FC = () => {
                 </button>
             </div>
 
-
+      <WelcomeForm />
+            
             <GoogleAnalytics gaId="G-X05HE2M1XM" />
         </section>
     </>

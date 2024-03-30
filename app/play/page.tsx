@@ -16,9 +16,13 @@ import PopularDeckSection from "@/components/popular_deck_section";
 import Header from '@/components/Header';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Head from 'next/head';
+import { StepsProvider } from 'react-step-builder';
+import WelcomeForm from '@/components/welcome_form';
+import { getAuthUser } from '../supabase-client';
 
 
 export default function GamePage() {
+
   
   return (
     <main className="min-h-screen">
@@ -43,6 +47,9 @@ export default function GamePage() {
       </Head>
       <Header />
       <PopularDeckSection />
+
+      <WelcomeForm />
+
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>
   );

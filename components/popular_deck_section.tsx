@@ -112,7 +112,7 @@ const PopularDeckSection = () => {
                 {/* <Slider {...settings}> */}
                     {games.map((game, index) => {
                         return (
-                            <DeckCard game={game} key={index} className="z-[1000]"/>
+                            <DeckCard game={game} key={index} />
                         )
 
                     })}

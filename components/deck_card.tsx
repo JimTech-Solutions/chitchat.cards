@@ -181,23 +181,23 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     };
 
     const handleTouchStart = (e : any) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    };
+        setTouchStart(e.targetTouches[0].clientX);
+        };
 
-    const handleTouchMove = (e : any) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+        const handleTouchMove = (e : any) => {
+        setTouchEnd(e.targetTouches[0].clientX);
     };
 
     const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 150) {
-        // Swipe Left
-        setOpen(false);
-    }
+        if (touchStart - touchEnd > 150) {
+            // Swipe Left
+            setOpen(false);
+        }
 
-    if (touchStart - touchEnd < -150) {
-        // Swipe Right
-        setOpen(false);
-    }
+        if (touchStart - touchEnd < -150) {
+            // Swipe Right
+            setOpen(false);
+        }
     };
 
     // console.log(game)
@@ -432,7 +432,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                                 <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.game_slug}`}>View Deck</Link>
                             ) : (
                                 <> 
-                                    <p className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md ">Unlock this Deck for Php 249.00 </p>
+                                    <p className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-sm shadow-md ">Unlock this Deck for Php 249.00 </p>
                                     <PayPalScriptProvider options={initialOptions}>
                                         <PayPalButtons
                                         style={style}
