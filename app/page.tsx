@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const checkUser = async () => {
         const user = await getAuthUser();
-        console.log(user);
+        // console.log(user);
 
         if (user) {
             <StepsProvider> 

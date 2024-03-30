@@ -66,7 +66,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         setHasAccess(access);
         setLoadingAccessCheck(false);
 
-        console.log(game.game_gid, access);
+        // console.log(game.game_gid, access);
     };
 
     useEffect(() => {
@@ -120,9 +120,6 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
 
             const supabase = createClientSupabaseClient();
             const user = await getAuthUser();
-            console.log('User', user)
-            console.log(game.game_gid)
-            console.log('Payment successful!', details);
 
             // Construct the payment object
             const payment: Payment = {

@@ -34,7 +34,6 @@ const SignUpForm = () => {
     });
 
     const onSubmit: SubmitHandler<FormFields> = async (formData) => {
-        console.log(formData);
 
         const username = Math.random().toString(36).substring(2, 15);
 
@@ -52,7 +51,6 @@ const SignUpForm = () => {
             });
 
             if (error) {
-                console.log(error);
                 throw error;
             }
 
@@ -60,7 +58,6 @@ const SignUpForm = () => {
                 router.push(`/play`);
             }
         } catch (error) {
-            console.log('error', error);
             setError('root', {
                 message: '' + error,
             });

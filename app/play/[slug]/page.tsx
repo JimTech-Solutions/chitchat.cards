@@ -91,7 +91,7 @@ const Page: React.FC = () => {
             p_slug: slug
         }).single();
 
-        console.log(result);
+        // console.log(result);
 
         if (gameError) {
             console.error(gameError);
@@ -101,7 +101,7 @@ const Page: React.FC = () => {
         } else {
 
             const gameData: GameData = result as GameData;
-            console.log(gameData);
+            // console.log(gameData);
 
             const checkAccess = async () => {
                 setLoadingAccessCheck(true);
@@ -109,7 +109,7 @@ const Page: React.FC = () => {
                 setHasAccess(access);
                 setLoadingAccessCheck(false);
 
-                console.log(gameData.game_gid, access);
+                // console.log(gameData.game_gid, access);
 
                 if (!access) {
                     router.push('/play')

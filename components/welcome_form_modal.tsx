@@ -19,12 +19,10 @@ interface FormQuestion {
   options: FormOption[];
 }
 
-// Define the structure of your selected options state
 interface SelectedOptions {
   [key: number]: { [key: string]: boolean };
 }
 
-// Define the structure of your form data
 interface FormDataItem {
   question: string;
   options: string[];
@@ -129,12 +127,9 @@ const WelcomeFormModal: React.FC = () => {
 
         const existingQuestionIndex = updatedFormData.findIndex(data => data.question === questionText);
         if (existingQuestionIndex !== -1) {
-        // Question already exists in formData, update the options
         if (selectedOptions[questionIndex]?.[optionValue]) {
-            // Option was previously selected, remove it
             updatedFormData[existingQuestionIndex].options = updatedFormData[existingQuestionIndex].options.filter(opt => opt !== optionText);
         } else {
-            // Option was not previously selected, add it
             updatedFormData[existingQuestionIndex].options.push(optionText);
         }
         } else {

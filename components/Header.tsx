@@ -48,7 +48,6 @@ const Header = ({filter = false}) => {
     try {
       const fetchedUser = await getAuthUser();
       if (mounted && fetchedUser) {
-        console.log('Fetched user', fetchedUser);
         setUser(fetchedUser);
       }
     } catch (error) {
