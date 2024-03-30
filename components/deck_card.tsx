@@ -267,8 +267,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
             "description" : "Test Invoice",
             "currency" : "PHP",
             "reminderTime" : 1,
-            "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-success`,
-            "failureRedirectUrl" : `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-failed`,
+            // "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-success`,
+            // "failureRedirectUrl" : `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-failed`,
             "payerEmail" : user?.email,
         }
 

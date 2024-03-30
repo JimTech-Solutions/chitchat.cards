@@ -1,25 +1,32 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from '@supabase/supabase-js';
 import { GameAccess } from '@/types/main';
+import { getAuthUser } from '@/app/supabase-client';
 
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY!);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { body } = req;
 
-    return res.status(200).json({req_query: req.query,  body: req.body, previewData: req.previewData  });
+    const user = await getAuthUser();
 
-    // const { data, error } = await supabase
-    //     .from('payments')
-    //     .update({ status: 'COMPLETED' })
-    //     .match({ transaction_id });
+    if (!body) {
+        return res.status(400).json({error: "No data received." });
+    }
 
-    // if (error) {
-    //     console.error('Error updating payment:', error);
-    //     return res.status(500).json({ error: 'Failed to update payment status' });
-    // } else {
+    const { data, error } = await supabase
+    .from('payments')
+    .update({ status: 'COMPLETED' })
+    .eq('transaction_id', body.id)
+    .select()
+
+    if (error) {
+        console.error('Error updating payment:', error);
+        return res.status(500).json({ error: 'Failed to update payment status' });
+    } else {
         // const gameAccess: GameAccess = {
         //     uid: user?.id,
-        //     gid: game.game_gid,
+        //     gid: data.gid,
         //     access_type: 'one-time-purchase', 
         //     status: 'active', 
         // };
@@ -34,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         //         console.log('Inserted game access:', accessData);
         //         res.redirect('/play');
         //     }
-    //     res.redirect('/play');
-    // }
+        console.log("PAYMENT SUCCESS WORKED!")
+    }
 
 }
