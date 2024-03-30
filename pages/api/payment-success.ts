@@ -5,13 +5,8 @@ import { GameAccess } from '@/types/main';
 const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_SERVICE_KEY!);
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const { transaction_id } = req.query;
 
-    console.log('transaction id', transaction_id);
-
-    if (!transaction_id) {
-        return res.status(400).json({ error: 'Transaction ID is required', req_query: req.query, req_cookies: req.cookies, body: req.body, previewData: req.previewData  });
-    }
+    return res.status(200).json({req_query: req.query,  body: req.body, previewData: req.previewData  });
 
     const { data, error } = await supabase
         .from('payments')

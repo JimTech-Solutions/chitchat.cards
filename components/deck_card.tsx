@@ -256,19 +256,21 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
 
     const xenditInvoiceClient = new InvoiceClient({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
 
-    const data: CreateInvoiceRequest = {
-        "amount" : 249,
-        "externalId" : game.game_title,
-        "description" : "Test Invoice",
-        "currency" : "PHP",
-        "reminderTime" : 1,
-        // "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-success`,
-        // "failureRedirectUrl" : `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-failed`,
-    }
-
+    
     const handleXenditButton = async () => {
         const supabase = createClientSupabaseClient();
-         const user = await getAuthUser();
+        const user = await getAuthUser();
+
+        const data: CreateInvoiceRequest = {
+            "amount" : 249,
+            "externalId" : game.game_title,
+            "description" : "Test Invoice",
+            "currency" : "PHP",
+            "reminderTime" : 1,
+            "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-success`,
+            "failureRedirectUrl" : `${process.env.NEXT_PUBLIC_SITE_URL}/api/payment-failed`,
+            "payerEmail" : user?.email,
+        }
 
         const invoice: Invoice = await xenditInvoiceClient.createInvoice({
             data
