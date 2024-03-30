@@ -16,8 +16,6 @@ const handleFacebookAuth = async () => {
         provider: 'facebook'
     })
 
-    console.log(data);
-    console.log(error);
 }
 
 const handleGoogleAuth = async () => {
@@ -27,8 +25,6 @@ const handleGoogleAuth = async () => {
         provider: 'google'
     })
 
-    console.log(data);
-    console.log(error);
 }
 
 const SocialButtons = () => {
