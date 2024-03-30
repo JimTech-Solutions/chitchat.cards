@@ -176,7 +176,7 @@ const WelcomeFormModal: React.FC = () => {
   return (
     
         <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={preventClose}>
+        <Dialog as="div" className="relative z-10 " onClose={preventClose}>
             <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -189,8 +189,8 @@ const WelcomeFormModal: React.FC = () => {
             <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
-            <div className="fixed inset-0 z-10 w-screen overflow-y-auto" ref={modalContentRef}>
-            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <div className="fixed inset-0 z-10 w-screen overflow-y-auto  overflow-y-auto flex justify-center items-center min-h-screen " ref={modalContentRef}>
+            <div className="flex items-end justify-center p-4  sm:items-center sm:p-0">
                 <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -222,7 +222,7 @@ const WelcomeFormModal: React.FC = () => {
                                         <button
                                             key={option.value}
                                             onClick={() => toggleOption(qIndex, option.value)}
-                                            className={`p-3 px-5 rounded-lg text-center ${
+                                            className={`p-3 px-5 rounded-lg w-full ${
                                             selectedOptions[qIndex]?.[option.value] ? 'bg-opacity-80 text-yellow-200 border-yellow-300' : 'border-gray-200'
                                             } border focus:outline-none`}
                                         >
