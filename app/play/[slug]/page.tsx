@@ -13,6 +13,7 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 import Header from '@/components/Header'
 import Head from 'next/head'
 import { checkUserAccess, getAuthUser } from '@/app/supabase-client'
+import WelcomeForm from '@/components/welcome_form'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -288,7 +289,7 @@ const Page: React.FC = () => {
                 </button>
             </div>
 
-      <WelcomeForm />
+            <WelcomeForm />
             
             <GoogleAnalytics gaId="G-X05HE2M1XM" />
         </section>
