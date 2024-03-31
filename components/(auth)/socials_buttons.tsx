@@ -30,10 +30,10 @@ const handleGoogleAuth = async () => {
 const SocialButtons = () => {
   return (
     <div className="my-4"> 
-        <button type="button" className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center text-[blue]"
+        {/* <button type="button" className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center text-[blue]"
         onClick={handleFacebookAuth}>
                 <FaFacebook /> Sign in with Facebook
-        </button>
+        </button> */}
         <button type="button" className="text-gray-900  border border-gray-300 focus:outline-none hover:opacity-50 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:text-white flex gap-2 w-full justify-center"
         onClick={handleGoogleAuth}>
                 <FaGoogle /> Sign in with Google
