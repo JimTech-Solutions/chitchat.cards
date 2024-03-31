@@ -50,9 +50,7 @@ export default function GamePage() {
       <UserProvider> 
         <Header />
         <PopularDeckSection />
-
         <WelcomeForm />
-
       </UserProvider>
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />

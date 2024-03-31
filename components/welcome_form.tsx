@@ -14,11 +14,11 @@ import { useUser } from '@/context/UserContext'
 const WelcomeForm: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
 
-    const { user, refreshUser } = useUser();
-
     useEffect(() => { 
         const checkWelcomeStatus = async () => {
             const supabase = createClientSupabaseClient(); 
+             const user = await getAuthUser();
+
 
             if (user) {
                 let { data: welcome_form, error } = await supabase
@@ -27,9 +27,15 @@ const WelcomeForm: React.FC = () => {
                 .eq('uid', user.id)
                 .single();
 
+                if (error) {
+                    console.log('welcome form', error)
+                } else {
+                    console.log('welcome form', welcome_form);
+                }
+
                 if (!welcome_form) {
                     setShowModal(true);
-                } 
+                }  
             }
         };
 

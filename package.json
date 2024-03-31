@@ -31,6 +31,7 @@
     "react-slick": "^0.30.2",
     "react-step-builder": "^3.0.6",
     "react-sweetalert2": "^0.6.0",
+    "resend": "^3.2.0",
     "slick-carousel": "^1.8.1",
     "xendit-node": "^4.3.0",
     "zod": "^3.22.4"

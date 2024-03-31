@@ -8,6 +8,9 @@ import { FaWaveSquare } from 'react-icons/fa'
 import {Steps, useSteps } from "react-step-builder";
 import { UserIcon } from '@heroicons/react/24/outline'
 import { createClientSupabaseClient, getAuthUser } from '@/app/supabase-client'
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
 interface FormOption {
   label: string;
@@ -161,7 +164,31 @@ const WelcomeFormModal: React.FC = () => {
               { formData: formData },
           ]).select();
           if (!error) {
-              setformEnd(true);
+
+            const htmlContent = formData.map(question => {
+                const options = question.options.map(option => 
+                  `<li>${option}</li>`).join('');
+                return `<h3>${question.question}</h3><ul>${options}</ul>`;
+            }).join('');
+
+            // Sending email with the generated HTML content
+            const { data, error } = await resend.emails.send({
+              from: 'ChitChat Team <team@chitchat.cards>',
+              to: ['mrjim.development@gmail.com'],
+              subject: 'Welcome to ChitChat!',
+              html: `<html><body><p>Someone sent a response:</p> ${htmlContent}</body></html>`, // using the generated HTML content
+              headers: {
+                'X-Entity-Ref-ID': '123456789',
+              }
+            });
+
+            if (error) {
+              console.log('Email Error', error);
+            } else {
+              console.log('Email sent successfully');
+            }
+
+            setformEnd(true);
           } else {
               console.log(error);
           }
