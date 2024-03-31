@@ -1,5 +1,6 @@
 "use client"
 import Header from '@/components/Header';
+import { UserProvider } from '@/context/UserContext';
 import Head from 'next/head';
 
 export default function PrivacyPolicy() {
