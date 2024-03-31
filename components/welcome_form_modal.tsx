@@ -165,30 +165,47 @@ const WelcomeFormModal: React.FC = () => {
           ]).select();
           if (!error) {
 
-            const htmlContent = formData.map(question => {
-                const options = question.options.map(option => 
-                  `<li>${option}</li>`).join('');
-                return `<h3>${question.question}</h3><ul>${options}</ul>`;
-            }).join('');
+            // const htmlContent = formData.map(question => {
+            //     const options = question.options.map(option => 
+            //       `<li>${option}</li>`).join('');
+            //     return `<h3>${question.question}</h3><ul>${options}</ul>`;
+            // }).join('');
 
-            // Sending email with the generated HTML content
-            const { data, error } = await resend.emails.send({
-              from: 'ChitChat Team <team@chitchat.cards>',
-              to: ['mrjim.development@gmail.com'],
-              subject: 'Welcome to ChitChat!',
-              html: `<html><body><p>Someone sent a response:</p> ${htmlContent}</body></html>`, // using the generated HTML content
-              headers: {
-                'X-Entity-Ref-ID': '123456789',
-              }
-            });
+            // // Sending email with the generated HTML content
+            // const { data, error } = await resend.emails.send({
+            //   from: 'ChitChat Team <team@chitchat.cards>',
+            //   to: ['mrjim.development@gmail.com'],
+            //   subject: 'Welcome to ChitChat!',
+            //   html: `<html><body><p>Someone sent a response:</p> ${htmlContent}</body></html>`, // using the generated HTML content
+            //   headers: {
+            //     'X-Entity-Ref-ID': '123456789',
+            //   }
+            // });
 
-            if (error) {
-              console.log('Email Error', error);
-            } else {
-              console.log('Email sent successfully');
+            // if (error) {
+            //   console.log('Email Error', error);
+            // } else {
+            //   console.log('Email sent successfully');
+            // }
+
+            try {
+              const response = await fetch('/api/sendEmail', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ formData }),
+              });
+
+              if (!response.ok) throw new Error('Failed to send email');
+
+              const result = await response.json();
+              console.log(result.message);
+
+              setformEnd(true);
+            } catch (error) {
+              console.error('Email sending error:', error);
             }
-
-            setformEnd(true);
           } else {
               console.log(error);
           }
