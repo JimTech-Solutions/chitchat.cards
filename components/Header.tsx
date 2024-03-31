@@ -89,7 +89,7 @@ const Header = ({filter = false}) => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-700 rounded-md bg-[#181818] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none drop-shadow-xl ">
+                  <Menu.Items className="absolute right-0 !z-[999] mt-2 w-56 origin-top-right divide-y divide-gray-700 rounded-md bg-[#181818] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none drop-shadow-xl ">
                     <div className="py-1">
 
                       {user && (
@@ -135,7 +135,8 @@ const Header = ({filter = false}) => {
                       <Menu.Item>
                         {({ active }: { active: boolean }) => (
                           <Link
-                            href="#"
+                            href="https://github.com/JimTech-Solutions/chitchat.cards"
+                            target='_blank'
                             className={classNames(
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
                               'block px-4 py-2 text-sm'
