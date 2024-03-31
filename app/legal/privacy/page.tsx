@@ -5,10 +5,8 @@ import Head from 'next/head';
 
 export default function PrivacyPolicy() {
   return (
-    <> 
-      <UserProvider> 
+    <UserProvider> 
         <Header />
-      </UserProvider>
 
       <div className="max-w-6xl mx-auto px-4 py-8 text-justify leading-relaxed">
         <Head>
@@ -71,6 +69,6 @@ export default function PrivacyPolicy() {
           <p className="mb-2">If you have any questions about this Privacy Policy, please contact us at <a href="mailto:admin@jimtech.solutions" className="text-primary">admin@jimtech.solutions</a>.</p>
         </section>
       </div>
-    </>
+    </UserProvider>
   );
 }
