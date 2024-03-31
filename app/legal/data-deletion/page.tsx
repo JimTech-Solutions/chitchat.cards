@@ -1,11 +1,14 @@
 "use client"
 import Header from '@/components/Header';
+import { UserProvider } from '@/context/UserContext';
 import Head from 'next/head';
 
 export default function PrivacyPolicy() {
   return (
     <> 
-      <Header />
+      <UserProvider> 
+        <Header />
+      </UserProvider>
 
       <div className="max-w-6xl mx-auto px-4 py-8 text-justify leading-relaxed">
         <Head>

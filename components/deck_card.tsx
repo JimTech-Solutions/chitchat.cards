@@ -27,7 +27,7 @@ import {
 import { getAuthUser, createClientSupabaseClient, checkUserAccess} from '@/app/supabase-client'
 
 import { Xendit, Invoice as InvoiceClient } from 'xendit-node';
-import { CreateInvoiceRequest, Invoice } from 'xendit-node/invoice/models'
+import type { CreateInvoiceRequest, Invoice } from 'xendit-node/invoice/models'
 
 import {GameAccess, Payment} from '@/types/main'
 import { useRouter } from 'next/navigation'

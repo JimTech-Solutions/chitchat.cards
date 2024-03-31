@@ -5,7 +5,9 @@ import Head from 'next/head';
 export default function PrivacyPolicy() {
   return (
     <> 
-      <Header />
+      <UserProvider> 
+        <Header />
+      </UserProvider>
 
       <div className="max-w-6xl mx-auto px-4 py-8 text-justify leading-relaxed">
         <Head>
