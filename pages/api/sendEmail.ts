@@ -28,8 +28,8 @@ export default async function handler(
             const { data, error } = await resend.emails.send({
                 from: 'ChitChat Team <team@chitchat.cards>',
                 to: ['mrjim.development@gmail.com'],
-                subject: 'Welcome to ChitChat!',
-                html: `<html><body><p>Someone sent a response:</p> ${htmlContent}</body></html>`,
+                subject: 'ChitChat - Someone answered the Welcome Form!',
+                html: `<html><body><p>Someone answered the Welcome Form:</p> ${htmlContent}</body></html>`,
                 headers: {
                     'X-Entity-Ref-ID': '123456789',
                 }
