@@ -9,14 +9,16 @@ import {Steps, StepsProvider, useSteps } from "react-step-builder";
 import { UserIcon } from '@heroicons/react/24/outline'
 import { createClientSupabaseClient, getAuthUser } from '@/app/supabase-client'
 import WelcomeFormModal from './welcome_form_modal'
+import { useUser } from '@/context/UserContext'
 
 const WelcomeForm: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
 
+    const { user, refreshUser } = useUser();
+
     useEffect(() => { 
         const checkWelcomeStatus = async () => {
             const supabase = createClientSupabaseClient(); 
-            const user = await getAuthUser();
 
             if (user) {
                 let { data: welcome_form, error } = await supabase

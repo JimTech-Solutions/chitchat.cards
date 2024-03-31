@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { StepsProvider } from "react-step-builder";
 import { getAuthUser } from "./supabase-client";
+import { UserProvider } from "@/context/UserContext";
 
 
 
@@ -53,12 +54,15 @@ export default function Home() {
         <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
         <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
       </Head>
-      
-      <Header />
-      <HeroSection />
-      <PopularDeckSection />
 
-      <WelcomeForm />
+      <UserProvider> 
+        <Header />
+        <HeroSection />
+        <PopularDeckSection />
+
+        <WelcomeForm />
+      </UserProvider>
+      
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>

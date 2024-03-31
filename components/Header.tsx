@@ -37,35 +37,17 @@ import ChitChatIcon from '@/assets/icons/logo_icon.svg'
 import Image from 'next/image';
 import { getAuthUser, logOutUser} from '@/app/supabase-client';
 import { User } from '@/types/main';
+import { useUser } from '@/context/UserContext';
 
 const Header = ({filter = false}) => {
 
-  const [user, setUser] = useState<any | null>(null);
+  const { user, refreshUser } = useUser();
 
-  useEffect(() => {
-  let mounted = true;
-  const fetchUser = async () => {
-    try {
-      const fetchedUser = await getAuthUser();
-      if (mounted && fetchedUser) {
-        setUser(fetchedUser);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      if (mounted) {
-        // setLoading(false);
-      }
-    }
-  };
 
-  fetchUser();
-
-  // Clean-up function to set mounted to false when component unmounts
-  return () => {
-    mounted = false;
-  };
-}, []);
+  const handleLogout = () => { 
+    logOutUser();
+    refreshUser();
+  }
 
   return (
     <header className=" flex justify-between w-full p-5">
@@ -172,7 +154,7 @@ const Header = ({filter = false}) => {
                                 active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
                                 'block px-4 py-2 text-sm'
                               )}
-                              onClick={logOutUser}
+                              onClick={handleLogout}
                             >
                               Logout
                             </Link>

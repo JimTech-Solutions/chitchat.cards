@@ -30,7 +30,8 @@ import { Xendit, Invoice as InvoiceClient } from 'xendit-node';
 import { CreateInvoiceRequest, Invoice } from 'xendit-node/invoice/models'
 
 import {GameAccess, Payment} from '@/types/main'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@/context/UserContext'
 
 const style : any = {"layout": "horizontal", "color": "black", "label": "pay"};
 
@@ -44,9 +45,17 @@ const initialOptions : ReactPayPalScriptOptions = {
     intent: "capture",
 };
 
+const xenditClient = new Xendit({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
+const { Invoice } = xenditClient
+
+const xenditInvoiceClient = new InvoiceClient({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
+
 const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const [open, setOpen] = useState(false)
     const cancelButtonRef = useRef(null)
+    const router = useRouter();
+
+    const { user, refreshUser } = useUser();
 
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
@@ -56,6 +65,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
     const [hasAccess, setHasAccess] = useState(false);
     const [loadingAccessCheck, setLoadingAccessCheck] = useState(false);
     const [swalProps, setSwalProps] = useState({});
+
+    const [loading, setLoading] = useState(false);
 
     // console.log(game);
 
@@ -68,8 +79,6 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         const access = await checkUserAccess(game.game_gid);
         setHasAccess(access);
         setLoadingAccessCheck(false);
-
-        // console.log(game.game_gid, access);
     };
 
     useEffect(() => {
@@ -82,6 +91,8 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
 
 
     useEffect(() => {
+
+        
         const handleScroll = (event : any) => {
             const { scrollTop, scrollHeight, clientHeight } = event.target;
             if (scrollTop + clientHeight >= scrollHeight || scrollTop === 0) {
@@ -122,7 +133,6 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         return actions.order.capture().then(async (details: any) => {
 
             const supabase = createClientSupabaseClient();
-            const user = await getAuthUser();
 
             const payment: Payment = {
                 uid: user?.id,
@@ -251,20 +261,22 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
         prevArrow: <PrevArrow />
     };
 
-    const xenditClient = new Xendit({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
-    const { Invoice } = xenditClient
-
-    const xenditInvoiceClient = new InvoiceClient({secretKey: process.env.NEXT_PUBLIC_XENDIT_SECRET_KEY!})
 
     
     const handleXenditButton = async () => {
+
+        setLoading(true);
         const supabase = createClientSupabaseClient();
-        const user = await getAuthUser();
+
+        if (!user) {
+            setLoading(false);
+            router.push('/signin');
+        }
 
         const data: CreateInvoiceRequest = {
             "amount" : 249,
-            "externalId" : game.game_title,
-            "description" : "Test Invoice",
+            "externalId" : `chitchat-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+            "description" : `ChitChat - Unlock ${game.game_title}`,
             "currency" : "PHP",
             "reminderTime" : 1,
             "successRedirectUrl": `${process.env.NEXT_PUBLIC_SITE_URL}/play`,
@@ -275,7 +287,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
             data
         })
 
-        console.log(invoice);
+        // console.log(invoice);
 
         const payment: Payment = {
             uid: user?.id,
@@ -307,6 +319,7 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
             console.log('Inserted payment:', paymentData);
             window.location.href = invoice.invoiceUrl;
         }
+        setLoading(false);
     }
     
   return (
@@ -490,18 +503,22 @@ const DeckCard: React.FC<DeckCardProps> = ({game}) => {
                                 <Link className="w-full text-center text-[#e7e7e7] bg-[#151515] rounded-lg border px-6 py-3 font-semibold text-sm shadow-md hover:opacity-80" href={`/play/${game.game_slug}`}>View Deck</Link>
                             ) : (
                                 <> 
-                                    <p className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-sm shadow-md ">Unlock this Deck for Php 249.00 </p>
-                                    <PayPalScriptProvider options={initialOptions}>
-                                        <PayPalButtons
-                                        style={style}
-                                        disabled={false}
-                                        forceReRender={[style]}
-                                        createOrder={createOrder}
-                                        onApprove={onApprove}
-                                        className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md "
-                                        />
-                                    </PayPalScriptProvider>
-                                    <button type="button" className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-sm shadow-md hover:opacity-80" onClick={handleXenditButton}>Xendit</button>
+                                    {/* <p className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-sm shadow-md ">Unlock this Deck for Php 249.00 </p> */}
+                                        <button type="button" className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg p-4 font-semibold text-md shadow-md hover:opacity-80" onClick={handleXenditButton} disabled={loading}>Unlock this Deck for Php 249.00 </button>
+
+                                        {user && (
+                                            <PayPalScriptProvider options={initialOptions}>
+                                                <PayPalButtons
+                                                style={style}
+                                                disabled={false}
+                                                forceReRender={[style]}
+                                                createOrder={createOrder}
+                                                onApprove={onApprove}
+                                                className="w-full text-center text-[#151515] bg-[#e7e7e7] rounded-lg px-6 py-3 font-semibold text-sm shadow-md "
+                                                />
+                                            </PayPalScriptProvider>
+                                        )}
+
                                 </>
                             )}
                             </div>

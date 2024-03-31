@@ -19,6 +19,7 @@ import Head from 'next/head';
 import { StepsProvider } from 'react-step-builder';
 import WelcomeForm from '@/components/welcome_form';
 import { getAuthUser } from '../supabase-client';
+import { UserProvider } from '@/context/UserContext';
 
 
 export default function GamePage() {
@@ -45,10 +46,14 @@ export default function GamePage() {
         <meta name="twitter:description" content="Boost your relationships with ChitChat! Explore interactive games and intriguing questions designed for couples and friends." />
         <meta name="twitter:image" content="https://chitchat.cards/images/thumbnail.png" />
       </Head>
-      <Header />
-      <PopularDeckSection />
 
-      <WelcomeForm />
+      <UserProvider> 
+        <Header />
+        <PopularDeckSection />
+
+        <WelcomeForm />
+
+      </UserProvider>
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>

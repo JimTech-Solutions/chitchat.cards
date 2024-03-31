@@ -95,10 +95,8 @@ export async function logOutUser() {
     let { error } = await supabase.auth.signOut()
 
     if (!error) {
-        // Redirect to the login page or home page as preferred
-        window.location.href = '/play'; // Change '/login.html' to your login page or any other page
+        window.location.href = '/play'; 
     } else {
-        // Handle the error, maybe show a message to the user
         console.error('Logout failed', error.message);
     }
 
