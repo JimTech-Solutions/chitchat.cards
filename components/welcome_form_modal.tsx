@@ -165,28 +165,12 @@ const WelcomeFormModal: React.FC = () => {
           ]).select();
           if (!error) {
 
-            // const htmlContent = formData.map(question => {
-            //     const options = question.options.map(option => 
-            //       `<li>${option}</li>`).join('');
-            //     return `<h3>${question.question}</h3><ul>${options}</ul>`;
-            // }).join('');
+            const htmlContent = formData.map(question => {
+                const options = question.options.map(option => 
+                  `<li>${option}</li>`).join('');
+                return `<h3>${question.question}</h3><ul>${options}</ul>`;
+            }).join('');
 
-            // // Sending email with the generated HTML content
-            // const { data, error } = await resend.emails.send({
-            //   from: 'ChitChat Team <team@chitchat.cards>',
-            //   to: ['mrjim.development@gmail.com'],
-            //   subject: 'Welcome to ChitChat!',
-            //   html: `<html><body><p>Someone sent a response:</p> ${htmlContent}</body></html>`, // using the generated HTML content
-            //   headers: {
-            //     'X-Entity-Ref-ID': '123456789',
-            //   }
-            // });
-
-            // if (error) {
-            //   console.log('Email Error', error);
-            // } else {
-            //   console.log('Email sent successfully');
-            // }
 
             try {
               const response = await fetch('/api/sendEmail', {
@@ -194,7 +178,12 @@ const WelcomeFormModal: React.FC = () => {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ formData }),
+                body: JSON.stringify({ 
+                  subject: 'ChitChat - Someone answered the Welcome Form!', 
+                  header: 'Someone answered the Welcome Form.',
+                  content: htmlContent,
+                  reply_to: 'team@chitchat.com'
+                }),
               });
 
               if (!response.ok) throw new Error('Failed to send email');
