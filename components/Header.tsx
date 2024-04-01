@@ -43,7 +43,7 @@ import { IoClose } from 'react-icons/io5';
 
 const Header = ({filter = false}) => {
 
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
