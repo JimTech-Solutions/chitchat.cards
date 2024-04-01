@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Grandstander } from 'next/font/google';
 import Link from 'next/link';
 import { CiFilter, CiUser } from "react-icons/ci";
 import { GrAppsRounded } from "react-icons/gr";
 
 import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { Dialog, Menu, Transition } from '@headlessui/react'
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ')
@@ -38,8 +38,16 @@ import Image from 'next/image';
 import { getAuthUser, logOutUser} from '@/app/supabase-client';
 import { User } from '@/types/main';
 import { useUser } from '@/context/UserContext';
+import ContactForm from './contact_form';
+import { IoClose } from 'react-icons/io5';
 
 const Header = ({filter = false}) => {
+
+  const [open, setOpen] = useState(true)
+  const cancelButtonRef = useRef(null)
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const modalContentRef = useRef<HTMLDivElement>(null);
 
   const { user, refreshUser } = useUser();
 
@@ -127,6 +135,7 @@ const Header = ({filter = false}) => {
                               active ? 'bg-gray-100 text-gray-900' : 'text-gray-200',
                               'block px-4 py-2 text-sm'
                             )}
+                            onClick={() => setOpen(true)}
                           >
                             Request a Feature
                           </Link>
@@ -171,6 +180,51 @@ const Header = ({filter = false}) => {
 
 
         </div>
+
+        <Transition.Root show={open} as={Fragment}>
+        <Dialog as="div" className="relative z-10 " onClose={setOpen}>
+            <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            >
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" />
+            </Transition.Child>
+
+            <div className="fixed inset-0 z-10 w-screen overflow-y-auto overflow-y-auto flex justify-center items-center min-h-screen " ref={modalContentRef}>
+            <div className="flex items-end justify-center p-4  sm:items-center sm:p-0">
+                <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-[#151515] text-left shadow-xl transition-all max-w-xl min-w-xl my-5 p-5">
+
+                      <div className="mb-4"> 
+                        <p className="text-2xl text-primary mb-2">Contact Us</p>
+                        <p className="text-gray-300 text-md">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex, voluptas?</p>
+                      </div>
+
+                      <button  className="absolute top-0 right-0 p-3 m-3 " onClick={() => setOpen(false)}> 
+                        <IoClose size={24}/>
+                      </button>
+                      <ContactForm /> 
+                        
+
+                    </Dialog.Panel>
+                </Transition.Child>
+            </div>
+            </div>
+        </Dialog>
+        </Transition.Root>
     </header>
   )
 }
