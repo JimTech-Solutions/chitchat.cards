@@ -21,12 +21,6 @@ export default function Home() {
     const checkUser = async () => {
         const user = await getAuthUser();
         // console.log(user);
-
-        if (user) {
-            <StepsProvider> 
-              <WelcomeForm />
-            </StepsProvider>
-        }
     }
 
     checkUser();

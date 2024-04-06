@@ -51,7 +51,6 @@ const Header = ({filter = false}) => {
 
   const { user, refreshUser } = useUser();
 
-
   const handleLogout = () => { 
     logOutUser();
     refreshUser();

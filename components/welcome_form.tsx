@@ -18,22 +18,17 @@ const WelcomeForm: React.FC = () => {
         const checkWelcomeStatus = async () => {
             const supabase = createClientSupabaseClient(); 
              const user = await getAuthUser();
-
-
             if (user) {
                 let { data: welcome_form, error } = await supabase
                 .from('welcome_form')
                 .select("*")
-                .eq('uid', user.id)
-                .single();
+                .eq('uid', user.id);
 
                 if (error) {
                     console.log('welcome form', error)
-                } else {
-                    console.log('welcome form', welcome_form);
                 }
 
-                if (!welcome_form) {
+                if (!welcome_form || welcome_form.length === 0) {
                     setShowModal(true);
                 }  
             }
