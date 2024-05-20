@@ -181,7 +181,7 @@ const Header = ({filter = false}) => {
         </div>
 
         <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10 " onClose={setOpen}>
+        <Dialog as="div" className="relative z-10" onClose={setOpen}>
             <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -205,18 +205,9 @@ const Header = ({filter = false}) => {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 >
-                <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-[#151515] text-left shadow-xl transition-all max-w-xl min-w-xl my-5 p-5">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-[#151515] text-left shadow-xl transition-all max-w-xl min-w-xl my-5 p-10 ">
 
-                      <div className="mb-4"> 
-                        <p className="text-2xl text-primary mb-2">Contact Us</p>
-                        <p className="text-gray-300 text-md">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex, voluptas?</p>
-                      </div>
-
-                      <button  className="absolute top-0 right-0 p-3 m-3 " onClick={() => setOpen(false)}> 
-                        <IoClose size={24}/>
-                      </button>
-                      <ContactForm /> 
-                        
+                      <ContactForm setOpen={setOpen}/> 
 
                     </Dialog.Panel>
                 </Transition.Child>
