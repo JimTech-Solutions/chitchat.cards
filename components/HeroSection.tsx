@@ -14,7 +14,7 @@ const HeroSection = () => {
 
         <div className="my-10 space-x-2">
             <Link className="w-full text-center text-[#151515] bg-[#FFD700] rounded-lg px-6 py-3 font-semibold text-md shadow-md  hover:bg-[#e7e7e7]" href="/play">Start your chat</Link>
-            <Link className="w-full text-center text-[#151515] bg-gray-200 rounded-lg px-6 py-3 font-semibold text-md shadow-md  hover:bg-[#e7e7e7]" href="/play">Generate Questions</Link>
+            <Link className="w-full text-center text-[#151515] bg-gray-200 rounded-lg px-6 py-3 font-semibold text-md shadow-md  hover:bg-[#e7e7e7]" href="/ai">Generate Questions</Link>
 
         </div>
 
