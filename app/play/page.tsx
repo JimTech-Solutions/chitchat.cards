@@ -20,6 +20,7 @@ import { StepsProvider } from 'react-step-builder';
 import WelcomeForm from '@/components/welcome_form';
 import { getAuthUser } from '../supabase-client';
 import { UserProvider } from '@/context/UserContext';
+import Footer from '@/components/footer';
 
 
 export default function GamePage() {
@@ -52,6 +53,8 @@ export default function GamePage() {
         <PopularDeckSection />
         <WelcomeForm />
       </UserProvider>
+
+      <Footer />
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>

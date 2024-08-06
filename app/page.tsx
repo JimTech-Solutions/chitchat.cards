@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { StepsProvider } from "react-step-builder";
 import { getAuthUser } from "./supabase-client";
 import { UserProvider } from "@/context/UserContext";
+import Footer from "@/components/footer";
 
 
 
@@ -57,7 +58,7 @@ export default function Home() {
         <WelcomeForm />
       </UserProvider>
       
-
+      <Footer />
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>
   );

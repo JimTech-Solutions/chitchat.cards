@@ -69,6 +69,7 @@ export default function PrivacyPolicy() {
           <p className="mb-2">If you have any questions about this Privacy Policy, please contact us at <a href="mailto:admin@jimtech.solutions" className="text-primary">admin@jimtech.solutions</a>.</p>
         </section>
       </div>
+      <Footer />
     </UserProvider>
   );
 }

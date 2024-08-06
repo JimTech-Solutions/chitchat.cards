@@ -81,6 +81,7 @@ export default function PrivacyPolicy() {
         </section>
 
       </div>
+      <Footer />
     </UserProvider>
   );
 }
