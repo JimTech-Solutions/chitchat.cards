@@ -19,6 +19,7 @@ import Head from 'next/head';
 import { getAuthUser } from '../supabase-client';
 import { UserProvider } from '@/context/UserContext';
 import AIForm from '@/components/ai_form';
+import Footer from '@/components/footer';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
@@ -55,6 +56,8 @@ export default function GamePage() {
         {/* <PopularDeckSection /> */}
         <AIForm />
       </UserProvider>
+
+      <Footer />
 
       <GoogleAnalytics gaId="G-X05HE2M1XM" />
     </main>

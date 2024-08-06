@@ -1,4 +1,5 @@
 "use client"
+import Footer from '@/components/footer';
 import Header from '@/components/Header';
 import { UserProvider } from '@/context/UserContext';
 import Head from 'next/head';
