@@ -51,7 +51,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={grandstander.className}>
+      <body className={`text-white grandstander.className`}>
           {children}
         <Analytics />
       </body>
