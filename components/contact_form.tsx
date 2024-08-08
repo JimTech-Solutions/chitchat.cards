@@ -105,7 +105,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ setOpen }) => {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {showSuccessMessage && (
-          <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+          <div className="p-4 mb-4 text-sm  rounded-lg bg-gray-800 text-green-400" role="alert">
             Your message has been sent successfully!
           </div>
         )}
